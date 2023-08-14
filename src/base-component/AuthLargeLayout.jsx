@@ -29,7 +29,7 @@ const AuthLargeLayout = ({ intl, username }) => (
       </div>
     </div>
     <div className="col-md-2 bg-white p-0">
-      <svg className="m1-n1 w-100 h-100 large-screen-svg-light" preserveAspectRatio="xMaxYMin meet">
+      <svg className="m1-n1 w-100 h-100 large-screen-svg-light" preserveAspectRatio="xMaxYMin meet" style={{marginRight:'0.25rem'}}>
         <g transform="skewX(171.6)">
           <rect x="0" y="0" height="100%" width="100%" />
         </g>
