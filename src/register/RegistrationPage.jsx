@@ -127,7 +127,7 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
-      this.handleSubmit()
+      console.log('nextProps.thirdPartyAuthContext.pipelineUserDetails', nextProps.thirdPartyAuthContext.pipelineUserDetails)
     }
   
 
@@ -246,7 +246,7 @@ class RegistrationPage extends React.Component {
 
 
   handleSubmit = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
@@ -303,6 +303,7 @@ class RegistrationPage extends React.Component {
 
     // add query params to the payload
     payload = { ...payload, ...this.queryParams };
+    console.log('======payload=====', payload)
     this.setState({
       totalRegistrationTime,
     }, () => {
