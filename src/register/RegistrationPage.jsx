@@ -122,7 +122,16 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    console.log('=========nextProps==========', nextProps)
+    if (
+      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
+      nextProps.thirdPartyAuthContext.pipelineUserDetails &&
+      Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
+    ) {
+      console.log('Điều kiện đúng');
+    }
+  
+
+
     if (nextProps.registrationFormData && this.props.registrationFormData !== nextProps.registrationFormData) {
       // Ensuring browser's autofill user credentials get filled and their state persists in the redux store.
       const nextState = {
@@ -189,6 +198,8 @@ class RegistrationPage extends React.Component {
         }, true);
       }
       return false;
+
+
     }
 
     if (this.props.thirdPartyAuthContext.pipelineUserDetails !== nextProps.thirdPartyAuthContext.pipelineUserDetails) {
@@ -613,8 +624,8 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    console.log('==========currentProvider=============', providers, secondaryProviders, thirdPartyAuthApiStatus)
-    console.log('====================', this.handleSubmit)
+    // console.log('==========currentProvider=============', providers, secondaryProviders, thirdPartyAuthApiStatus)
+    // console.log('====================', this.handleSubmit)
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
