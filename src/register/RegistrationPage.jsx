@@ -98,6 +98,7 @@ class RegistrationPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log('========================', this.props.thirdPartyAuthContext)
     sendPageEvent('login_and_registration', 'register');
     const payload = { ...this.queryParams };
     window.optimizely = window.optimizely || [];
