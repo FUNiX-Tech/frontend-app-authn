@@ -127,7 +127,7 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
-      this.handleSubmit(e)
+      this.handleSubmit()
     }
   
 
@@ -246,7 +246,7 @@ class RegistrationPage extends React.Component {
 
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
