@@ -118,6 +118,7 @@ class RegistrationPage extends React.Component {
     payload.is_register_page = true;
     this.props.resetRegistrationForm();
     this.props.getThirdPartyAuthContext(payload);
+    console.log('========================', this.props)
   }
 
   shouldComponentUpdate(nextProps) {
