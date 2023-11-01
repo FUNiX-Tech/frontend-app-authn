@@ -98,6 +98,7 @@ class RegistrationPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log('========================', this.props.thirdPartyAuthContext)
     sendPageEvent('login_and_registration', 'register');
     const payload = { ...this.queryParams };
     window.optimizely = window.optimizely || [];
@@ -226,7 +227,10 @@ class RegistrationPage extends React.Component {
     }
     const state = { errors, values };
     this.setState({ ...state });
+  
   };
+
+
 
   handleSubmit = (e) => {
     e.preventDefault();
