@@ -127,7 +127,7 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
-      console.log('Điều kiện đúng');
+      this.handleSubmit()
     }
   
 
