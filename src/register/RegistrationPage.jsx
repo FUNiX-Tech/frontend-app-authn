@@ -118,10 +118,11 @@ class RegistrationPage extends React.Component {
     payload.is_register_page = true;
     this.props.resetRegistrationForm();
     this.props.getThirdPartyAuthContext(payload);
-    console.log('========================', this.props)
+
   }
 
   shouldComponentUpdate(nextProps) {
+    console.log('=========nextProps==========', nextProps)
     if (nextProps.registrationFormData && this.props.registrationFormData !== nextProps.registrationFormData) {
       // Ensuring browser's autofill user credentials get filled and their state persists in the redux store.
       const nextState = {
@@ -609,11 +610,11 @@ class RegistrationPage extends React.Component {
   }
 
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
-    console.log('==========currentProvider=============', currentProvider)
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-
+    console.log('==========currentProvider=============', providers, secondaryProviders, thirdPartyAuthApiStatus)
+    console.log('====================', this.handleSubmit)
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
