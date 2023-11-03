@@ -323,11 +323,11 @@ class RegistrationPage extends React.Component {
     // add query params to the payload
     payload = { ...payload, ...this.queryParams };
     console.log('======payload=====', payload)
-    // this.setState({
-    //   totalRegistrationTime,
-    // }, () => {
-    //   this.props.registerNewUser(payload);
-    // });
+    this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
   }
 
   handleOnBlur = (e) => {
