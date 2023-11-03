@@ -133,7 +133,7 @@ class RegistrationPage extends React.Component {
         email: this.state.email,
         is_authn_mfe: true,
       };
-      console.log(payload)
+      console.log(nextProps)
     }
   
 
