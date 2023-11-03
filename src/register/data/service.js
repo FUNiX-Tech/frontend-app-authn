@@ -3,25 +3,26 @@ import { getAuthenticatedHttpClient, getHttpClient } from '@edx/frontend-platfor
 import * as QueryString from 'query-string';
 
 export async function registerRequest(registrationInformation) {
+  console.log('========', registrationInformation)
   const requestConfig = {
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     isPublic: true,
   };
 
-  const { data } = await getAuthenticatedHttpClient()
-    .post(
-      `${getConfig().LMS_BASE_URL}/api/user/v2/account/registration/`,
-      QueryString.stringify(registrationInformation),
-      requestConfig,
-    )
-    .catch((e) => {
-      throw (e);
-    });
+  // const { data } = await getAuthenticatedHttpClient()
+  //   .post(
+  //     `${getConfig().LMS_BASE_URL}/api/user/v2/account/registration/`,
+  //     QueryString.stringify(registrationInformation),
+  //     requestConfig,
+  //   )
+  //   .catch((e) => {
+  //     throw (e);
+  //   });
 
-  return {
-    redirectUrl: data.redirect_url || `${getConfig().LMS_BASE_URL}/dashboard`,
-    success: data.success || false,
-  };
+  // return {
+  //   redirectUrl: data.redirect_url || `${getConfig().LMS_BASE_URL}/dashboard`,
+  //   success: data.success || false,
+  // };
 }
 
 export async function getFieldsValidations(formPayload) {
