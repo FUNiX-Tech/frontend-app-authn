@@ -129,7 +129,7 @@ class RegistrationPage extends React.Component {
     ) {
       const { startTime } = this.state;
       const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
-      const country = nextProps.thirdPartyAuthContext.contryCode
+      const country = nextProps.thirdPartyAuthContext.countryCode
       const totalRegistrationTime = (Date.now() - startTime) / 1000;
       let payload = {
         name: name,
@@ -142,7 +142,11 @@ class RegistrationPage extends React.Component {
         honor_code : true
 
       };
-      console.log(nextProps.thirdPartyAuthContext)
+       this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
     }
   
 
