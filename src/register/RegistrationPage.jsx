@@ -142,11 +142,11 @@ class RegistrationPage extends React.Component {
         honor_code : true
 
       };
-       this.setState({
-      totalRegistrationTime,
-    }, () => {
-      this.props.registerNewUser(payload);
-    });
+    //    this.setState({
+    //   totalRegistrationTime,
+    // }, () => {
+    //   this.props.registerNewUser(payload);
+    // });
     }
   
 
