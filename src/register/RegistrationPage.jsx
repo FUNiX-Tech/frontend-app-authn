@@ -127,6 +127,7 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
+      const { startTime } = this.state;
       const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
       const country = nextProps.thirdPartyAuthContext.contryCode
       const totalRegistrationTime = (Date.now() - startTime) / 1000;
