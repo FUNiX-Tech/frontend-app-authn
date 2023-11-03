@@ -127,13 +127,21 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
+      const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
+      const country = nextProps.thirdPartyAuthContext.contryCode
+      const totalRegistrationTime = (Date.now() - startTime) / 1000;
       let payload = {
-        name: this.state.name,
-        username: this.state.username,
-        email: this.state.email,
+        name: name,
+        username: username,
+        email: email,
         is_authn_mfe: true,
+        social_auth_provider : 'Google',
+        totalRegistrationTime ,
+        country ,
+        honor_code : true
+
       };
-      console.log(nextProps)
+      console.log(payload)
     }
   
 
