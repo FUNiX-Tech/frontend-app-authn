@@ -127,7 +127,13 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
-      console.log('nextProps.thirdPartyAuthContext.pipelineUserDetails', nextProps.thirdPartyAuthContext.pipelineUserDetails)
+      let payload = {
+        name: this.state.name,
+        username: this.state.username,
+        email: this.state.email,
+        is_authn_mfe: true,
+      };
+      console.log(payload)
     }
   
 
@@ -304,11 +310,11 @@ class RegistrationPage extends React.Component {
     // add query params to the payload
     payload = { ...payload, ...this.queryParams };
     console.log('======payload=====', payload)
-    this.setState({
-      totalRegistrationTime,
-    }, () => {
-      this.props.registerNewUser(payload);
-    });
+    // this.setState({
+    //   totalRegistrationTime,
+    // }, () => {
+    //   this.props.registerNewUser(payload);
+    // });
   }
 
   handleOnBlur = (e) => {
