@@ -133,19 +133,19 @@ class RegistrationPage extends React.Component {
       const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
       const country = nextProps.thirdPartyAuthContext.countryCode
       const totalRegistrationTime = (Date.now() - startTime) / 1000;
-      let payload = {
-        name: name,
-        username: username,
-        email: email,
-        is_authn_mfe: true,
-        social_auth_provider : 'Google',
-        totalRegistrationTime ,
-        country ,
-        honor_code : true
+      // let payload = {
+      //   name: name,
+      //   username: username,
+      //   email: email,
+      //   is_authn_mfe: true,
+      //   social_auth_provider : 'Google',
+      //   totalRegistrationTime ,
+      //   country ,
+      //   honor_code : true
 
-      };
-      console.log(payload)
-      registerRequest(payload)
+      // };
+      // console.log(payload)
+      // registerRequest(payload)
       
       
     }
@@ -661,7 +661,7 @@ class RegistrationPage extends React.Component {
    
     return (
       <>
-
+        <h1 onClick={()=>this.handlerRegist(providers)}>Click</h1>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}
