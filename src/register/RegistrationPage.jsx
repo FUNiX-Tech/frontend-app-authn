@@ -58,6 +58,7 @@ import RegistrationFailure from './RegistrationFailure';
 import TermsOfService from './TermsOfService';
 import UsernameField from './UsernameField';
 import { getLevenshteinSuggestion, getSuggestionForInvalidEmail } from './utils';
+import { registerRequest } from './data/service';
 
 class RegistrationPage extends React.Component {
   constructor(props, context) {
@@ -123,34 +124,30 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    // if (
-    //   nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
-    //   nextProps.thirdPartyAuthContext.pipelineUserDetails &&
-    //   Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
-    // ) {
-    //   const { startTime } = this.state;
-    //   const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
-    //   const country = nextProps.thirdPartyAuthContext.countryCode
-    //   const totalRegistrationTime = (Date.now() - startTime) / 1000;
-    //   let payload = {
-    //     name: name,
-    //     username: username,
-    //     email: email,
-    //     is_authn_mfe: true,
-    //     social_auth_provider : 'Google',
-    //     totalRegistrationTime ,
-    //     country ,
-    //     honor_code : true
+    if (
+      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
+      nextProps.thirdPartyAuthContext.pipelineUserDetails &&
+      Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
+    ) {
+      const { startTime } = this.state;
+      const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
+      const country = nextProps.thirdPartyAuthContext.countryCode
+      const totalRegistrationTime = (Date.now() - startTime) / 1000;
+      let payload = {
+        name: name,
+        username: username,
+        email: email,
+        is_authn_mfe: true,
+        social_auth_provider : 'Google',
+        totalRegistrationTime ,
+        country ,
+        honor_code : true
 
-    //   };
-    //   console.log('===' , payload)
-    //    this.setState({
-    //   totalRegistrationTime,
-    // }, () => {
-    //   this.props.registerNewUser(payload);
-    // });
-  
-    // }
+      };
+      registerNewUser(payload)
+      
+      
+    }
   
 
 
@@ -608,7 +605,7 @@ class RegistrationPage extends React.Component {
   }
 
   handlerRegist (){
-    e.preventDefault()
+   
     console.log('eeeeeeee', this.props)
      const { startTime } = this.state;
      
@@ -663,7 +660,7 @@ class RegistrationPage extends React.Component {
    
     return (
       <>
-        <button onClick={this.handlerRegist}>Reeeee</button>
+
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}
