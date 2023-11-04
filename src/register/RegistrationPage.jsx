@@ -145,7 +145,7 @@ class RegistrationPage extends React.Component {
 
       };
       console.log(payload)
-      registerNewUser(payload)
+      registerRequest(payload)
       
       
     }
