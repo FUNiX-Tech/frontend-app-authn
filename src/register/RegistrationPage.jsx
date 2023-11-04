@@ -607,9 +607,9 @@ class RegistrationPage extends React.Component {
     });
   }
 
-  handlerRegist (e){
+  handlerRegist (){
     e.preventDefault()
-    console.log('eeeeeeee', e)
+    console.log('eeeeeeee', this.props)
      const { startTime } = this.state;
      
       const totalRegistrationTime = (Date.now() - startTime) / 1000;
@@ -660,10 +660,10 @@ class RegistrationPage extends React.Component {
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
     // console.log('==========currentProvider=============', providers, secondaryProviders, thirdPartyAuthApiStatus)
     // console.log('====================', this.handleSubmit)
-    console.log('======', providers)
+   
     return (
       <>
-        <button onClick={this.handlerRegist(providers)}>Reeeee</button>
+        <button onClick={this.handlerRegist}>Reeeee</button>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}
