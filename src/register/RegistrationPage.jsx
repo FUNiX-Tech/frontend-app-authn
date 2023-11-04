@@ -607,7 +607,8 @@ class RegistrationPage extends React.Component {
     });
   }
 
-  handlerRegist (){
+  handlerRegist (e){
+    e.preventDefault()
     console.log('======', totalRegistrationTime)
     
     //    this.setState({
