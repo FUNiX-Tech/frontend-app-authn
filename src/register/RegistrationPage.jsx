@@ -94,6 +94,7 @@ class RegistrationPage extends React.Component {
       validatePassword: false,
       values: {},
       focusedField: '',
+      hasRegisteredUser: false, 
     };
   }
 
@@ -145,6 +146,7 @@ class RegistrationPage extends React.Component {
       console.log('===' , payload)
        this.setState({
       totalRegistrationTime,
+      hasRegisteredUser: true,
     }, () => {
       this.props.registerNewUser(payload);
     });
@@ -268,7 +270,7 @@ class RegistrationPage extends React.Component {
   
   };
 
-
+  
 
   handleSubmit = (e) => {
     e.preventDefault();
