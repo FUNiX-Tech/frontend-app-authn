@@ -144,6 +144,7 @@ class RegistrationPage extends React.Component {
         honor_code : true
 
       };
+      console.log(payload)
       registerNewUser(payload)
       
       
