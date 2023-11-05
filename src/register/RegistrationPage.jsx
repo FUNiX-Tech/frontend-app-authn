@@ -682,7 +682,6 @@ class RegistrationPage extends React.Component {
       {/* {this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails &&
         <h1 onClick={this.handlerRegist()}>Click</h1>
       } */}
-        {/* <h1 onClick={handlerRegist()}>Click</h1> */}
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}

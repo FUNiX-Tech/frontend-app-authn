@@ -71,6 +71,7 @@ SocialAuthProviders.propTypes = {
     loginUrl: PropTypes.string,
     registerUrl: PropTypes.string,
   })),
+  handlerClick : PropTypes.func
 };
 
 export default injectIntl(SocialAuthProviders);
