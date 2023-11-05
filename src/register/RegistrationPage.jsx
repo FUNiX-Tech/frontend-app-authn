@@ -674,7 +674,7 @@ class RegistrationPage extends React.Component {
     payload = { ...payload, ...this.queryParams };
     console.log('======payload=====', payload)
 
-    this.setState(prevState => ({ hasRunHandler: true })) 
+   
   
   }
 
@@ -724,16 +724,15 @@ class RegistrationPage extends React.Component {
       this.props.thirdPartyAuthContext.pipelineUserDetails
     ) {
       this.handlerRegist();
-     
+      console.log('=========', this.state)
+      this.setState(prevState => ({ hasRunHandler: true })) 
+      console.log('111111' , this.state)
     }
  
  
     return (  
       <>
-        {this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
-          this.props.thirdPartyAuthContext.pipelineUserDetails && (
-            <h1 onClick={() => this.handlerRegist()}>Click</h1>
-          )}
+       
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}
