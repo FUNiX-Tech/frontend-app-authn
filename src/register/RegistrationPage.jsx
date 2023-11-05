@@ -125,15 +125,17 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (
-      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
-      nextProps.thirdPartyAuthContext.pipelineUserDetails &&
-      Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
-    ) {
-      console.log(this.state)
-      this.setState(prevState => ({ hasRunHandler: true }));
-      console.log('===', this.state)
-    }
+    console.log(Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0)
+    console.log(nextProps)
+    // if (
+    //   nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
+    //   nextProps.thirdPartyAuthContext.pipelineUserDetails &&
+    //   Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
+    // ) {
+    //   console.log(this.state)
+    //   this.setState(prevState => ({ hasRunHandler: true }));
+    //   console.log('===', this.state)
+    // }
   
 
 
