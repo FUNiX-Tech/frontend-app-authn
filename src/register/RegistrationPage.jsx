@@ -100,7 +100,7 @@ class RegistrationPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
+    console.log(this.props.thirdPartyAuthContext.currentProvider === 'Google')
      if (
       this.props.thirdPartyAuthContext.currentProvider === 'Google'
     ){
@@ -614,6 +614,7 @@ class RegistrationPage extends React.Component {
 
 
   handlerRegist (){
+    console.log('==============')
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
     const dynamicFieldErrorMessages = {};
@@ -713,12 +714,12 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    if (this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails ){
-      setTimeout(() => {
-        this.handlerRegist();
-      }, 1000);
+    // if (this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails ){
+    //   setTimeout(() => {
+    //     this.handlerRegist();
+    //   }, 1000);
     
-    }
+    // }
  
  
     return (  
