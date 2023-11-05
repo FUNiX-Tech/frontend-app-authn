@@ -613,7 +613,11 @@ class RegistrationPage extends React.Component {
       };
       console.log(payload)
    
-  
+   this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
   }
 
   renderEmailFeedback() {
