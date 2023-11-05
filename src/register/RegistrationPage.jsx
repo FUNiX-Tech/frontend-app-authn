@@ -711,9 +711,7 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    console.log('secondaryProviders' , secondaryProviders)
-    console.log('currentProvider', currentProvider)
-    console.log('thirdPartyAuthApiStatus' , thirdPartyAuthApiStatus)
+    console.log('===', this.props)
 
     return (  
       <>
