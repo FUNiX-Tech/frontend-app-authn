@@ -100,7 +100,13 @@ class RegistrationPage extends React.Component {
   }
 
   componentDidMount() {
-    
+     if (
+      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
+      nextProps.thirdPartyAuthContext.pipelineUserDetails &&
+      Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
+    ){
+      console.log('========google============')
+    }
     sendPageEvent('login_and_registration', 'register');
     const payload = { ...this.queryParams };
     window.optimizely = window.optimizely || [];
