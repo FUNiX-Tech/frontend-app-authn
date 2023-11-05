@@ -613,12 +613,22 @@ class RegistrationPage extends React.Component {
     const country = this.props.thirdPartyAuthContext.countryCode
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
 
-    console.log(email, firstName, lastName, name, username ,country , totalRegistrationTime )
-    // this.setState({
-    //   totalRegistrationTime,
-    // }, () => {
-    //   this.props.registerNewUser(payload);
-    // });
+
+      let payload = {
+        name: name,
+        username: username,
+        email: email,
+        is_authn_mfe: true,
+        social_auth_provider : 'Google',
+        totalRegistrationTime ,
+        country ,
+        honor_code : true
+      }
+    this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
   
   }
 
