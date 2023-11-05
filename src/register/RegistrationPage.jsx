@@ -675,16 +675,19 @@ class RegistrationPage extends React.Component {
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
     if (this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails ){
-      setTimeout(() => {
-        this.handlerRegist();
-      }, 1000);
+      // setTimeout(() => {
+      //   this.handlerRegist();
+      // }, 1000);
     
     }
  
  
     return (  
       <>
-
+        {this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+          this.props.thirdPartyAuthContext.pipelineUserDetails && (
+            <h1 onClick={() => this.handlerRegist()}>Click</h1>
+          )}
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}
