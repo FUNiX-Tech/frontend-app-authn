@@ -125,7 +125,7 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    console.log(Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0)
+    // console.log(Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0)
     console.log(nextProps)
     if (
       !this.state.hasRunHandler &&
