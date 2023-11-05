@@ -14,7 +14,7 @@ function SocialAuthProviders(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    console.log('=====handleSubmit======')
     const url = e.currentTarget.dataset.providerUrl;
     window.location.href = getConfig().LMS_BASE_URL + url;
     props.handlerClick()

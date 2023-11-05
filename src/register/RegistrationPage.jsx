@@ -129,10 +129,10 @@ class RegistrationPage extends React.Component {
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
-      const { startTime } = this.state;
-      const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
-      const country = nextProps.thirdPartyAuthContext.countryCode
-      const totalRegistrationTime = (Date.now() - startTime) / 1000;
+      // const { startTime } = this.state;
+      // const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
+      // const country = nextProps.thirdPartyAuthContext.countryCode
+      // const totalRegistrationTime = (Date.now() - startTime) / 1000;
       // let payload = {
       //   name: name,
       //   username: username,
@@ -146,7 +146,9 @@ class RegistrationPage extends React.Component {
       // };
       // console.log(payload)
       // registerRequest(payload)
-      
+      setTimeout(() => {
+        this.handlerRegist();
+      }, 1000);
       
     }
   
@@ -607,7 +609,7 @@ class RegistrationPage extends React.Component {
 
 
   handlerRegist (){
-    // console.log('==============')
+    console.log('==============')
     // const { startTime } = this.state;
     // const {email, firstName, lastName, name, username} = this.props.thirdPartyAuthContext.pipelineUserDetails
     // const country = this.props.thirdPartyAuthContext.countryCode
@@ -679,9 +681,7 @@ class RegistrationPage extends React.Component {
     // }
     return (  
       <>
-      {/* {this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails &&
-        <h1 onClick={this.handlerRegist()}>Click</h1>
-      } */}
+
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
             {intl.formatMessage(messages['registration.other.options.heading'])}
