@@ -101,9 +101,9 @@ class RegistrationPage extends React.Component {
 
   componentDidMount() {
      if (
-      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
-      nextProps.thirdPartyAuthContext.pipelineUserDetails &&
-      Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
+      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+      this.props.thirdPartyAuthContext.pipelineUserDetails &&
+      Object.keys(this.props.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ){
       console.log('========google============')
     }
