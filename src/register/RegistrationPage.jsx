@@ -129,7 +129,7 @@ class RegistrationPage extends React.Component {
     console.log(nextProps )
 
     if (
-      nextProps.thirdPartyAuthApiStatus == 'compete' && 
+      nextProps.thirdPartyAuthApiStatus == 'complete' && 
       nextProps.thirdPartyAuthContext.currentProvider === 'Google'
       //  &&
       // nextProps.thirdPartyAuthContext.pipelineUserDetails &&
