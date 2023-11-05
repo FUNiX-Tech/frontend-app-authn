@@ -128,7 +128,6 @@ class RegistrationPage extends React.Component {
     // console.log(Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0)
     console.log(nextProps)
     if (
-      !this.state.hasRunHandler &&
       this.state.email.length > 0 && 
       nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
       nextProps.thirdPartyAuthContext.pipelineUserDetails &&
