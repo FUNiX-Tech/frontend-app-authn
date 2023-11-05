@@ -137,7 +137,7 @@ class RegistrationPage extends React.Component {
       // Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
       // console.log(this.state)
-      console.log(this.state)
+      this.handlerRegist()
       this.setState(prevState => ({ hasRunHandler: true }));
     }
   
