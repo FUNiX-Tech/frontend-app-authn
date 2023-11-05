@@ -722,7 +722,7 @@ class RegistrationPage extends React.Component {
       this.props.thirdPartyAuthContext.pipelineUserDetails
     ) {
       this.handlerRegist();
-      this.setState({ hasRunHandler: true }); // Đánh dấu rằng đã chạy this.handlerRegist()
+      this.setState(prevState => ({ hasRunHandler: true })) // Đánh dấu rằng đã chạy this.handlerRegist()
     }
  
  
