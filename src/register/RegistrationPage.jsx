@@ -100,15 +100,7 @@ class RegistrationPage extends React.Component {
   }
 
   componentDidMount() {
-    if (
-      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
-      this.props.thirdPartyAuthContext.pipelineUserDetails
-    ) {
-      // Nếu thoả điều kiện, sau 1 giây sẽ tự động kích hoạt onClick của h1.
-      setTimeout(() => {
-        this.handlerRegist();
-      }, 1000);
-    }
+    
     sendPageEvent('login_and_registration', 'register');
     const payload = { ...this.queryParams };
     window.optimizely = window.optimizely || [];
@@ -682,7 +674,12 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-
+    if (this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails ){
+      setTimeout(() => {
+        this.handlerRegist();
+      }, 1000);
+    
+    }
  
  
     return (  
