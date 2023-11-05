@@ -125,8 +125,6 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    // console.log(Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0)
-    console.log(nextProps )
 
     if (
       nextProps.thirdPartyAuthApiStatus == 'complete' && 
@@ -137,7 +135,7 @@ class RegistrationPage extends React.Component {
       // Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
       // console.log(this.state)
-      this.handlerRegist()
+      this.handlerRegist(nextProps)
       this.setState(prevState => ({ hasRunHandler: true }));
     }
   
@@ -597,64 +595,12 @@ class RegistrationPage extends React.Component {
   }
 
 
-  handlerRegist (){
-    console.log('==============')
+  handlerRegist (nextProps){
+  
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
-    const dynamicFieldErrorMessages = {};
-
-    let payload = {
-      name: this.state.name,
-      username: this.state.username,
-      email: this.state.email,
-      is_authn_mfe: true,
-    };
-
-    if (this.props.thirdPartyAuthContext.currentProvider) {
-      payload.social_auth_provider = this.props.thirdPartyAuthContext.currentProvider;
-    } else {
-      payload.password = this.state.password;
-    }
-
-    if (this.showDynamicRegistrationFields) {
-      payload.extendedProfile = [];
-      Object.keys(this.props.fieldDescriptions).forEach((fieldName) => {
-        if (this.props.extendedProfile.includes(fieldName)) {
-          payload.extendedProfile.push({ fieldName, fieldValue: this.state.values[fieldName] });
-        } else {
-          payload[fieldName] = this.state.values[fieldName];
-        }
-        dynamicFieldErrorMessages[fieldName] = this.props.fieldDescriptions[fieldName].error_message;
-      });
-      if (
-        this.props.fieldDescriptions[FIELDS.HONOR_CODE]
-        && this.props.fieldDescriptions[FIELDS.HONOR_CODE].type === 'tos_and_honor_code'
-      ) {
-        payload[FIELDS.HONOR_CODE] = true;
-      }
-    } else {
-      payload.country = this.state.country;
-      payload.honor_code = true;
-    }
-
-    if (!this.isFormValid(payload, dynamicFieldErrorMessages)) {
-      this.setState(prevState => ({
-        errorCode: FORM_SUBMISSION_ERROR,
-        failureCount: prevState.failureCount + 1,
-      }));
-      return;
-    }
-
-    if (getConfig().MARKETING_EMAILS_OPT_IN) {
-      payload.marketing_emails_opt_in = this.state.marketingOptIn;
-    }
-
-    payload = snakeCaseObject(payload);
-    payload.totalRegistrationTime = totalRegistrationTime;
-
-    // add query params to the payload
-    payload = { ...payload, ...this.queryParams };
-    console.log('======payload=====', payload)
+   
+    console.log('======payload=====', nextProps)
 
    
   
