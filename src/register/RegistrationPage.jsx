@@ -664,7 +664,11 @@ class RegistrationPage extends React.Component {
     payload = { ...payload, ...this.queryParams };
     console.log('======payload=====', payload)
      
-
+    this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
   
   }
 
