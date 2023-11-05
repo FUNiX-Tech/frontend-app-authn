@@ -607,63 +607,63 @@ class RegistrationPage extends React.Component {
 
 
   handlerRegist (){
-    console.log('=======', this.props)
-    // const { startTime } = this.state;
-    // const totalRegistrationTime = (Date.now() - startTime) / 1000;
-    // const dynamicFieldErrorMessages = {};
 
-    // let payload = {
-    //   name: this.state.name,
-    //   username: this.state.username,
-    //   email: this.state.email,
-    //   is_authn_mfe: true,
-    // };
+    const { startTime } = this.state;
+    const totalRegistrationTime = (Date.now() - startTime) / 1000;
+    const dynamicFieldErrorMessages = {};
 
-    // if (this.props.thirdPartyAuthContext.currentProvider) {
-    //   payload.social_auth_provider = this.props.thirdPartyAuthContext.currentProvider;
-    // } else {
-    //   payload.password = this.state.password;
-    // }
+    let payload = {
+      name: this.state.name,
+      username: this.state.username,
+      email: this.state.email,
+      is_authn_mfe: true,
+    };
 
-    // if (this.showDynamicRegistrationFields) {
-    //   payload.extendedProfile = [];
-    //   Object.keys(this.props.fieldDescriptions).forEach((fieldName) => {
-    //     if (this.props.extendedProfile.includes(fieldName)) {
-    //       payload.extendedProfile.push({ fieldName, fieldValue: this.state.values[fieldName] });
-    //     } else {
-    //       payload[fieldName] = this.state.values[fieldName];
-    //     }
-    //     dynamicFieldErrorMessages[fieldName] = this.props.fieldDescriptions[fieldName].error_message;
-    //   });
-    //   if (
-    //     this.props.fieldDescriptions[FIELDS.HONOR_CODE]
-    //     && this.props.fieldDescriptions[FIELDS.HONOR_CODE].type === 'tos_and_honor_code'
-    //   ) {
-    //     payload[FIELDS.HONOR_CODE] = true;
-    //   }
-    // } else {
-    //   payload.country = this.state.country;
-    //   payload.honor_code = true;
-    // }
+    if (this.props.thirdPartyAuthContext.currentProvider) {
+      payload.social_auth_provider = this.props.thirdPartyAuthContext.currentProvider;
+    } else {
+      payload.password = this.state.password;
+    }
 
-    // if (!this.isFormValid(payload, dynamicFieldErrorMessages)) {
-    //   this.setState(prevState => ({
-    //     errorCode: FORM_SUBMISSION_ERROR,
-    //     failureCount: prevState.failureCount + 1,
-    //   }));
-    //   return;
-    // }
+    if (this.showDynamicRegistrationFields) {
+      payload.extendedProfile = [];
+      Object.keys(this.props.fieldDescriptions).forEach((fieldName) => {
+        if (this.props.extendedProfile.includes(fieldName)) {
+          payload.extendedProfile.push({ fieldName, fieldValue: this.state.values[fieldName] });
+        } else {
+          payload[fieldName] = this.state.values[fieldName];
+        }
+        dynamicFieldErrorMessages[fieldName] = this.props.fieldDescriptions[fieldName].error_message;
+      });
+      if (
+        this.props.fieldDescriptions[FIELDS.HONOR_CODE]
+        && this.props.fieldDescriptions[FIELDS.HONOR_CODE].type === 'tos_and_honor_code'
+      ) {
+        payload[FIELDS.HONOR_CODE] = true;
+      }
+    } else {
+      payload.country = this.state.country;
+      payload.honor_code = true;
+    }
 
-    // if (getConfig().MARKETING_EMAILS_OPT_IN) {
-    //   payload.marketing_emails_opt_in = this.state.marketingOptIn;
-    // }
+    if (!this.isFormValid(payload, dynamicFieldErrorMessages)) {
+      this.setState(prevState => ({
+        errorCode: FORM_SUBMISSION_ERROR,
+        failureCount: prevState.failureCount + 1,
+      }));
+      return;
+    }
 
-    // payload = snakeCaseObject(payload);
-    // payload.totalRegistrationTime = totalRegistrationTime;
+    if (getConfig().MARKETING_EMAILS_OPT_IN) {
+      payload.marketing_emails_opt_in = this.state.marketingOptIn;
+    }
 
-    // // add query params to the payload
-    // payload = { ...payload, ...this.queryParams };
-     
+    payload = snakeCaseObject(payload);
+    payload.totalRegistrationTime = totalRegistrationTime;
+
+    // add query params to the payload
+    payload = { ...payload, ...this.queryParams };
+    console.log('===payload==', payload)
     // this.setState({
     //   totalRegistrationTime,
     // }, () => {
