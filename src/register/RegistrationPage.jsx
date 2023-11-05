@@ -711,12 +711,10 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    // console.log('==========currentProvider=============', providers, secondaryProviders, thirdPartyAuthApiStatus)
-    // console.log('====================', this.handleSubmit)
-    console.log('isInstitutionAuthActive' , isInstitutionAuthActive)
-    console.log('isSocialAuthActive' , isSocialAuthActive)
-    console.log('isEnterpriseLoginDisabled' , isEnterpriseLoginDisabled)
-    console.log(providers)
+    console.log('secondaryProviders' , secondaryProviders)
+    console.log('currentProvider', currentProvider)
+    console.log('thirdPartyAuthApiStatus' , thirdPartyAuthApiStatus)
+
     return (  
       <>
         {/* <h1 onClick={handlerRegist()}>Click</h1> */}
