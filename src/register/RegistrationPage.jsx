@@ -72,6 +72,7 @@ class RegistrationPage extends React.Component {
     this.tpaHint = getTpaHint();
     const { registrationFormData } = this.props;
     this.state = {
+      hasRunHandler: false, 
       country: '',
       email: registrationFormData.email,
       name: registrationFormData.name,
@@ -101,6 +102,7 @@ class RegistrationPage extends React.Component {
 
   componentDidMount() {
     console.log(this.props.thirdPartyAuthContext.currentProvider === 'Google')
+    console.log(this.props)
      if (
       this.props.thirdPartyAuthContext.currentProvider === 'Google'
     ){
@@ -714,12 +716,14 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    // if (this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails ){
-    //   setTimeout(() => {
-    //     this.handlerRegist();
-    //   }, 1000);
-    
-    // }
+    if (
+      !this.state.hasRunHandler &&
+      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+      this.props.thirdPartyAuthContext.pipelineUserDetails
+    ) {
+      this.handlerRegist();
+      this.setState({ hasRunHandler: true }); // Đánh dấu rằng đã chạy this.handlerRegist()
+    }
  
  
     return (  
