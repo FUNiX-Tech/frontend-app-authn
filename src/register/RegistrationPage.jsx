@@ -605,6 +605,7 @@ class RegistrationPage extends React.Component {
     });
   }
 
+
   handlerRegist (){
     
     // const { startTime } = this.state;
@@ -711,8 +712,11 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    console.log('===', this.props)
 
+    console.log('===', this.props.thirdPartyAuthContext.currentProvider, this.props.thirdPartyAuthContext.pipelineUserDetails)
+    if (this.props.thirdPartyAuthContext.currentProvider == 'Google' ){
+      console.log('=====google====')
+    }
     return (  
       <>
         {/* <h1 onClick={handlerRegist()}>Click</h1> */}
