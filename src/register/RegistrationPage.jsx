@@ -607,28 +607,28 @@ class RegistrationPage extends React.Component {
 
 
   handlerRegist (){
-    console.log('==============')
-    const { startTime } = this.state;
-    const {email, firstName, lastName, name, username} = this.props.thirdPartyAuthContext.pipelineUserDetails
-    const country = this.props.thirdPartyAuthContext.countryCode
-    const totalRegistrationTime = (Date.now() - startTime) / 1000;
+    // console.log('==============')
+    // const { startTime } = this.state;
+    // const {email, firstName, lastName, name, username} = this.props.thirdPartyAuthContext.pipelineUserDetails
+    // const country = this.props.thirdPartyAuthContext.countryCode
+    // const totalRegistrationTime = (Date.now() - startTime) / 1000;
 
 
-      let payload = {
-        name: name,
-        username: username,
-        email: email,
-        is_authn_mfe: true,
-        social_auth_provider : 'Google',
-        totalRegistrationTime ,
-        country ,
-        honor_code : true
-      }
-    this.setState({
-      totalRegistrationTime,
-    }, () => {
-      this.props.registerNewUser(payload);
-    });
+    //   let payload = {
+    //     name: name,
+    //     username: username,
+    //     email: email,
+    //     is_authn_mfe: true,
+    //     social_auth_provider : 'Google',
+    //     totalRegistrationTime ,
+    //     country ,
+    //     honor_code : true
+    //   }
+    // this.setState({
+    //   totalRegistrationTime,
+    // }, () => {
+    //   this.props.registerNewUser(payload);
+    // });
   
   }
 
@@ -679,9 +679,9 @@ class RegistrationPage extends React.Component {
     // }
     return (  
       <>
-      {this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails &&
+      {/* {this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails &&
         <h1 onClick={this.handlerRegist()}>Click</h1>
-      }
+      } */}
         {/* <h1 onClick={handlerRegist()}>Click</h1> */}
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
           <div className="mt-4 mb-3 h4">
@@ -701,7 +701,7 @@ class RegistrationPage extends React.Component {
             )}
             {isSocialAuthActive && (
               <div className="row m-0">
-                <SocialAuthProviders socialAuthProviders={providers} referrer={REGISTER_PAGE} />
+                <SocialAuthProviders socialAuthProviders={providers} handlerClick={this.handleSubmit} referrer={REGISTER_PAGE} />
               </div>
             )}
           </>
