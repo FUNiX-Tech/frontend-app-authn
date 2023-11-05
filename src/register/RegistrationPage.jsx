@@ -130,14 +130,15 @@ class RegistrationPage extends React.Component {
 
     if (
       nextProps.thirdPartyAuthApiStatus == 'complete' && 
-      nextProps.thirdPartyAuthContext.currentProvider === 'Google'
+      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
+      !this.state.hasRunHandler
       //  &&
       // nextProps.thirdPartyAuthContext.pipelineUserDetails &&
       // Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
     ) {
       // console.log(this.state)
-      // this.setState(prevState => ({ hasRunHandler: true }));
       console.log(this.state)
+      this.setState(prevState => ({ hasRunHandler: true }));
     }
   
 
