@@ -718,16 +718,16 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    if (
-      !this.state.hasRunHandler &&
-      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
-      this.props.thirdPartyAuthContext.pipelineUserDetails
-    ) {
-      this.handlerRegist();
-      console.log('=========', this.state)
-      this.setState(prevState => ({ hasRunHandler: true })) 
-      console.log('111111' , this.state)
-    }
+    // if (
+    //   !this.state.hasRunHandler &&
+    //   this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+    //   this.props.thirdPartyAuthContext.pipelineUserDetails
+    // ) {
+    //   this.handlerRegist();
+    //   console.log('=========', this.state)
+    //   this.setState(prevState => ({ hasRunHandler: true })) 
+    //   console.log('111111' , this.state)
+    // }
  
  
     return (  
