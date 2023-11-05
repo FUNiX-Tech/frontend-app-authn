@@ -673,6 +673,8 @@ class RegistrationPage extends React.Component {
     // add query params to the payload
     payload = { ...payload, ...this.queryParams };
     console.log('======payload=====', payload)
+
+    this.setState(prevState => ({ hasRunHandler: true })) 
   
   }
 
@@ -722,7 +724,7 @@ class RegistrationPage extends React.Component {
       this.props.thirdPartyAuthContext.pipelineUserDetails
     ) {
       this.handlerRegist();
-      this.setState(prevState => ({ hasRunHandler: true })) // Đánh dấu rằng đã chạy this.handlerRegist()
+     
     }
  
  
