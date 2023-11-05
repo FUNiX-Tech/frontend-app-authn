@@ -14,10 +14,8 @@ function SocialAuthProviders(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log('=====handleSubmit======')
     const url = e.currentTarget.dataset.providerUrl;
     window.location.href = getConfig().LMS_BASE_URL + url;
-    props.handlerClick()
   }
 
   const socialAuth = socialAuthProviders.map((provider, index) => (
@@ -71,7 +69,7 @@ SocialAuthProviders.propTypes = {
     loginUrl: PropTypes.string,
     registerUrl: PropTypes.string,
   })),
-  handlerClick : PropTypes.func
+
 };
 
 export default injectIntl(SocialAuthProviders);

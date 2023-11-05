@@ -100,7 +100,15 @@ class RegistrationPage extends React.Component {
   }
 
   componentDidMount() {
-    
+    if (
+      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+      this.props.thirdPartyAuthContext.pipelineUserDetails
+    ) {
+      // Nếu thoả điều kiện, sau 1 giây sẽ tự động kích hoạt onClick của h1.
+      setTimeout(() => {
+        this.handlerRegist();
+      }, 1000);
+    }
     sendPageEvent('login_and_registration', 'register');
     const payload = { ...this.queryParams };
     window.optimizely = window.optimizely || [];
@@ -124,33 +132,33 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    if (
-      nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
-      nextProps.thirdPartyAuthContext.pipelineUserDetails &&
-      Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
-    ) {
-      // const { startTime } = this.state;
-      // const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
-      // const country = nextProps.thirdPartyAuthContext.countryCode
-      // const totalRegistrationTime = (Date.now() - startTime) / 1000;
-      // let payload = {
-      //   name: name,
-      //   username: username,
-      //   email: email,
-      //   is_authn_mfe: true,
-      //   social_auth_provider : 'Google',
-      //   totalRegistrationTime ,
-      //   country ,
-      //   honor_code : true
+    // if (
+    //   nextProps.thirdPartyAuthContext.currentProvider === 'Google' &&
+    //   nextProps.thirdPartyAuthContext.pipelineUserDetails &&
+    //   Object.keys(nextProps.thirdPartyAuthContext.pipelineUserDetails).length > 0
+    // ) {
+    //   const { startTime } = this.state;
+    //   const {email, firstName, lastName, name, username} = nextProps.thirdPartyAuthContext.pipelineUserDetails
+    //   const country = nextProps.thirdPartyAuthContext.countryCode
+    //   const totalRegistrationTime = (Date.now() - startTime) / 1000;
+    //   let payload = {
+    //     name: name,
+    //     username: username,
+    //     email: email,
+    //     is_authn_mfe: true,
+    //     social_auth_provider : 'Google',
+    //     totalRegistrationTime ,
+    //     country ,
+    //     honor_code : true
 
-      // };
-      // console.log(payload)
-      // registerRequest(payload)
-      setTimeout(() => {
-        this.handlerRegist();
-      }, 1000);
+    //   };
+    //   console.log(payload)
+    //   registerRequest(payload)
+    //   setTimeout(() => {
+    //     this.handlerRegist();
+    //   }, 1000);
       
-    }
+    // }
   
 
 
@@ -676,9 +684,7 @@ class RegistrationPage extends React.Component {
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
 
  
-    // if (this.props.thirdPartyAuthContext.currentProvider == 'Google' && this.props.thirdPartyAuthContext.pipelineUserDetails ){
-    //   this.handlerRegist()
-    // }
+ 
     return (  
       <>
 
@@ -700,7 +706,7 @@ class RegistrationPage extends React.Component {
             )}
             {isSocialAuthActive && (
               <div className="row m-0">
-                <SocialAuthProviders socialAuthProviders={providers} handlerClick={this.handleSubmit} referrer={REGISTER_PAGE} />
+                <SocialAuthProviders socialAuthProviders={providers} referrer={REGISTER_PAGE} />
               </div>
             )}
           </>
