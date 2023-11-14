@@ -62,12 +62,15 @@ const Logistration = (props) => {
     </div>
   );
 
-  const [activeTab, setActiveTab] = useState('register');
-
+  const savedActiveTab = localStorage.getItem('activeTab');
+  const initialTab = savedActiveTab || 'individual';
+  const [activeTab, setActiveTab] = useState(initialTab);
+  useEffect(() => {
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
   const handleSwitch = (tab) => {
     setActiveTab(tab);
   };
-
   return (
     <BaseComponent>
       <div>
@@ -123,21 +126,21 @@ const Logistration = (props) => {
                         <div>
                           <Button
                             variant="link"
-                            className={`mb-2 mb-sm-0 ${activeTab === 'register' ? 'active a' : ''}`}
-                            onClick={() => handleSwitch('register')}
+                            className={`mb-2 mb-sm-0 ${activeTab === 'individual' ? 'active a' : ''}`}
+                            onClick={() => handleSwitch('individual')}
                           >
                             Individual
                           </Button>
                           <Button
                             variant="link"
-                            className={activeTab === 'org' ? 'active a' : ''}
-                            onClick={() => handleSwitch('org')}
+                            className={activeTab === 'organization' ? 'active a' : ''}
+                            onClick={() => handleSwitch('organization')}
                           >
                             Organization
                           </Button>
                         </div>
                         <div>
-                          {activeTab === 'register' && (
+                          {activeTab === 'individual' && (
                             <div>
                               <RegistrationPage
                                 institutionLogin={institutionLogin}
@@ -145,7 +148,7 @@ const Logistration = (props) => {
                               />
                             </div>
                           )}
-                          {activeTab === 'org' && (
+                          {activeTab === 'organization' && (
                             <div>
                               <RegistrationPage
                                 institutionLogin={institutionLogin}

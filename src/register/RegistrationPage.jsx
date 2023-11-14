@@ -288,17 +288,48 @@ class RegistrationPage extends React.Component {
     payload.totalRegistrationTime = totalRegistrationTime;
     // add query params to the payload
     if (this.props.org){
-      payload = { ...payload, ...this.queryParams, organization: 'staging' };
+      payload = { ...payload, ...this.queryParams, organization: 'Staging' };
     } else {
       payload = { ...payload, ...this.queryParams, organization: '' };
     }
-    console.log(payload)
+
     this.setState({
       totalRegistrationTime,
     }, () => {
       this.props.registerNewUser(payload);
     });
   }
+
+  handlerRegist (){
+    const { startTime } = this.state;
+      const {email, name, username} = this.props.registrationFormData
+      const country = this.state.country
+      const totalRegistrationTime = (Date.now() - startTime) / 1000;
+      let payload = {
+        name: name,
+        username: username,
+        email: email,
+        is_authn_mfe: true,
+        social_auth_provider : 'Google',
+        totalRegistrationTime ,
+        country ,
+        honor_code : true,
+        next: '/' ,
+        organization : this.props.org ? 'Staging' : ''
+      };
+      if (this.props.org){
+        payload = { ...payload, ...this.queryParams, organization: 'staging' };
+      } else {
+        payload = { ...payload, ...this.queryParams, organization: '' };
+      }
+   
+   this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
+  }
+
 
   handleOnBlur = (e) => {
     let { name, value } = e.target;
@@ -617,7 +648,16 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
+    if (
+      this.props.thirdPartyAuthApiStatus == 'complete' && 
+      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+      !this.state.hasRunHandler
+      && this.props.registrationFormData.email.length > 0
 
+    ) {
+      this.handlerRegist()
+      this.setState(prevState => ({ hasRunHandler: true }));
+    }
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
