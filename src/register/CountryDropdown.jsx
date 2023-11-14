@@ -23,6 +23,7 @@ class CountryDropdown extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    // console.log(this.props)
     const selectedCountry = this.props.options.find((o) => o[COUNTRY_CODE_KEY] === nextProps.value);
     if (this.props.value !== nextProps.value) {
       if (selectedCountry) {

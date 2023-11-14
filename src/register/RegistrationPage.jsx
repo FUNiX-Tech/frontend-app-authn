@@ -58,6 +58,8 @@ import RegistrationFailure from './RegistrationFailure';
 import TermsOfService from './TermsOfService';
 import UsernameField from './UsernameField';
 import { getLevenshteinSuggestion, getSuggestionForInvalidEmail } from './utils';
+import SelectOrg from '../common-components/SelectOrg';
+
 
 class RegistrationPage extends React.Component {
   constructor(props, context) {
@@ -120,6 +122,8 @@ class RegistrationPage extends React.Component {
   }
 
   shouldComponentUpdate(nextProps) {
+    
+ 
     if (nextProps.registrationFormData && this.props.registrationFormData !== nextProps.registrationFormData) {
       // Ensuring browser's autofill user credentials get filled and their state persists in the redux store.
       const nextState = {
@@ -230,7 +234,6 @@ class RegistrationPage extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
     const dynamicFieldErrorMessages = {};
@@ -283,9 +286,13 @@ class RegistrationPage extends React.Component {
 
     payload = snakeCaseObject(payload);
     payload.totalRegistrationTime = totalRegistrationTime;
-
     // add query params to the payload
-    payload = { ...payload, ...this.queryParams };
+    if (this.props.org){
+      payload = { ...payload, ...this.queryParams, organization: 'staging' };
+    } else {
+      payload = { ...payload, ...this.queryParams, organization: '' };
+    }
+    console.log(payload)
     this.setState({
       totalRegistrationTime,
     }, () => {
@@ -303,6 +310,7 @@ class RegistrationPage extends React.Component {
       name = 'password';
       value = this.state.password;
     }
+   
     const payload = {
       is_authn_mfe: true,
       form_field_key: name,
@@ -312,6 +320,7 @@ class RegistrationPage extends React.Component {
       name: this.state.name,
       honor_code: true,
       country: this.state.country,
+
     };
     this.validateInput(name, value, payload);
   }
@@ -330,8 +339,9 @@ class RegistrationPage extends React.Component {
     this.setState({
       [e.target.name]: value,
     });
+    
   }
-
+  
   handleOnFocus = (e) => {
     const fieldName = e.target.name;
     this.setState({
@@ -849,6 +859,20 @@ class RegistrationPage extends React.Component {
                 {intl.formatMessage(messages['registration.opt.in.label'], { siteName: getConfig().SITE_NAME })}
               </Form.Checkbox>
             )}
+            
+              {/* {this.props.org &&  <SelectOrg
+                name="organization"
+                floatingLabel='Organization'
+                options={[{code:'123', name:'funix'}]}
+                value={this.state.organization}
+                autoComplete="on"
+                handleBlur={this.handleOnBlur}
+                handleFocus={this.handleOnFocus}
+                errorMessage={this.state.errors.organization}
+                handleChange={this.handleOnChange}
+                // errorCode={this.state.errorCode}
+              />} */}
+
             {!(this.showDynamicRegistrationFields) ? (
               <HonorCode
                 fieldType="tos_and_honor_code"

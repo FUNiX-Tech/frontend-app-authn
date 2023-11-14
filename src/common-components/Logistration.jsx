@@ -8,13 +8,14 @@ import {
   Icon,
   Tab,
   Tabs,
+  Button
 } from '@edx/paragon';
 import { ChevronLeft } from '@edx/paragon/icons';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import BaseComponent from '../base-component';
-import { LOGIN_PAGE, REGISTER_PAGE } from '../data/constants';
+import { LOGIN_PAGE, REGISTER_PAGE  } from '../data/constants';
 import { getTpaHint, updatePathWithQueryParams } from '../data/utils';
 import { LoginPage } from '../login';
 import { RegistrationPage } from '../register';
@@ -26,7 +27,7 @@ const Logistration = (props) => {
   const [institutionLogin, setInstitutionLogin] = useState(false);
   const [key, setKey] = useState('');
   const disablePublicAccountCreation = getConfig().ALLOW_PUBLIC_ACCOUNT_CREATION === false;
-
+  
   useEffect(() => {
     const authService = getAuthService();
     if (authService) {
@@ -60,6 +61,12 @@ const Logistration = (props) => {
       </span>
     </div>
   );
+
+  const [activeTab, setActiveTab] = useState('register');
+
+  const handleSwitch = (tab) => {
+    setActiveTab(tab);
+  };
 
   return (
     <BaseComponent>
@@ -106,10 +113,50 @@ const Logistration = (props) => {
                 {selectedPage === LOGIN_PAGE
                   ? <LoginPage institutionLogin={institutionLogin} handleInstitutionLogin={handleInstitutionLogin} />
                   : (
-                    <RegistrationPage
-                      institutionLogin={institutionLogin}
-                      handleInstitutionLogin={handleInstitutionLogin}
-                    />
+                    // <RegistrationPage
+                    //   institutionLogin={institutionLogin}
+                    //   handleInstitutionLogin={handleInstitutionLogin}
+                    //   org = {props.org}
+                    // />
+                   <>
+                     <div>
+                        <div>
+                          <Button
+                            variant="link"
+                            className={`mb-2 mb-sm-0 ${activeTab === 'register' ? 'active a' : ''}`}
+                            onClick={() => handleSwitch('register')}
+                          >
+                            Individual
+                          </Button>
+                          <Button
+                            variant="link"
+                            className={activeTab === 'org' ? 'active a' : ''}
+                            onClick={() => handleSwitch('org')}
+                          >
+                            Organization
+                          </Button>
+                        </div>
+                        <div>
+                          {activeTab === 'register' && (
+                            <div>
+                              <RegistrationPage
+                                institutionLogin={institutionLogin}
+                                handleInstitutionLogin={handleInstitutionLogin}
+                              />
+                            </div>
+                          )}
+                          {activeTab === 'org' && (
+                            <div>
+                              <RegistrationPage
+                                institutionLogin={institutionLogin}
+                                handleInstitutionLogin={handleInstitutionLogin}
+                                org
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                   </>
                   )}
               </div>
             </div>
@@ -122,10 +169,12 @@ const Logistration = (props) => {
 Logistration.propTypes = {
   intl: intlShape.isRequired,
   selectedPage: PropTypes.string,
+
 };
 
 Logistration.defaultProps = {
   selectedPage: REGISTER_PAGE,
+
 };
 
 export default injectIntl(Logistration);
