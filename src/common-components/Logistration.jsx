@@ -123,7 +123,14 @@ const Logistration = (props) => {
                     // />
                    <>
                      <div>
-                        <div>
+                    
+                              <RegistrationPage
+                                institutionLogin={institutionLogin}
+                                handleInstitutionLogin={handleInstitutionLogin}
+                                org
+                              />
+        
+                        {/* <div>
                           <Button
                             variant="link"
                             className={`mb-2 mb-sm-0 ${activeTab === 'individual' ? 'active a' : ''}`}
@@ -157,7 +164,7 @@ const Logistration = (props) => {
                               />
                             </div>
                           )}
-                        </div>
+                        </div> */}
                       </div>
                    </>
                   )}
