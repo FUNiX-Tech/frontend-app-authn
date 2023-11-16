@@ -58,7 +58,7 @@ import RegistrationFailure from './RegistrationFailure';
 import TermsOfService from './TermsOfService';
 import UsernameField from './UsernameField';
 import { getLevenshteinSuggestion, getSuggestionForInvalidEmail } from './utils';
-import SelectOrg from '../common-components/SelectOrg';
+
 
 
 class RegistrationPage extends React.Component {
@@ -317,11 +317,6 @@ class RegistrationPage extends React.Component {
         next: '/' ,
         organization : this.props.org ? 'Staging' : ''
       };
-      if (this.props.org){
-        payload = { ...payload, ...this.queryParams, organization: 'staging' };
-      } else {
-        payload = { ...payload, ...this.queryParams, organization: '' };
-      }
    
    this.setState({
       totalRegistrationTime,
