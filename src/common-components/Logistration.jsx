@@ -8,13 +8,14 @@ import {
   Icon,
   Tab,
   Tabs,
+  Button
 } from '@edx/paragon';
 import { ChevronLeft } from '@edx/paragon/icons';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import BaseComponent from '../base-component';
-import { LOGIN_PAGE, REGISTER_PAGE } from '../data/constants';
+import { LOGIN_PAGE, REGISTER_PAGE  } from '../data/constants';
 import { getTpaHint, updatePathWithQueryParams } from '../data/utils';
 import { LoginPage } from '../login';
 import { RegistrationPage } from '../register';
@@ -26,7 +27,7 @@ const Logistration = (props) => {
   const [institutionLogin, setInstitutionLogin] = useState(false);
   const [key, setKey] = useState('');
   const disablePublicAccountCreation = getConfig().ALLOW_PUBLIC_ACCOUNT_CREATION === false;
-
+  
   useEffect(() => {
     const authService = getAuthService();
     if (authService) {
@@ -61,6 +62,15 @@ const Logistration = (props) => {
     </div>
   );
 
+  const savedActiveTab = localStorage.getItem('activeTab');
+  const initialTab = savedActiveTab || 'individual';
+  const [activeTab, setActiveTab] = useState(initialTab);
+  useEffect(() => {
+    localStorage.setItem('activeTab', activeTab);
+  }, [activeTab]);
+  const handleSwitch = (tab) => {
+    setActiveTab(tab);
+  };
   return (
     <BaseComponent>
       <div>
@@ -106,10 +116,57 @@ const Logistration = (props) => {
                 {selectedPage === LOGIN_PAGE
                   ? <LoginPage institutionLogin={institutionLogin} handleInstitutionLogin={handleInstitutionLogin} />
                   : (
-                    <RegistrationPage
-                      institutionLogin={institutionLogin}
-                      handleInstitutionLogin={handleInstitutionLogin}
-                    />
+                    // <RegistrationPage
+                    //   institutionLogin={institutionLogin}
+                    //   handleInstitutionLogin={handleInstitutionLogin}
+                    //   org = {props.org}
+                    // />
+                   <>
+                     <div>
+                    
+                              <RegistrationPage
+                                institutionLogin={institutionLogin}
+                                handleInstitutionLogin={handleInstitutionLogin}
+                                org
+                              />
+        
+                        {/* <div>
+                          <Button
+                            variant="link"
+                            className={`mb-2 mb-sm-0 ${activeTab === 'individual' ? 'active a' : ''}`}
+                            onClick={() => handleSwitch('individual')}
+                          >
+                            Individual
+                          </Button>
+                          <Button
+                            variant="link"
+                            className={activeTab === 'organization' ? 'active a' : ''}
+                            onClick={() => handleSwitch('organization')}
+                          >
+                            Organization
+                          </Button>
+                        </div>
+                        <div>
+                          {activeTab === 'individual' && (
+                            <div>
+                              <RegistrationPage
+                                institutionLogin={institutionLogin}
+                                handleInstitutionLogin={handleInstitutionLogin}
+                              />
+                            </div>
+                          )}
+                          {activeTab === 'organization' && (
+                            <div>
+                              <RegistrationPage
+                                institutionLogin={institutionLogin}
+                                handleInstitutionLogin={handleInstitutionLogin}
+                                org
+                              />
+                            </div>
+                          )}
+                        </div> */}
+                      </div>
+                   </>
                   )}
               </div>
             </div>
@@ -122,10 +179,12 @@ const Logistration = (props) => {
 Logistration.propTypes = {
   intl: intlShape.isRequired,
   selectedPage: PropTypes.string,
+
 };
 
 Logistration.defaultProps = {
   selectedPage: REGISTER_PAGE,
+
 };
 
 export default injectIntl(Logistration);
