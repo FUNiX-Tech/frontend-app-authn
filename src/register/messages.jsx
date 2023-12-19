@@ -7,6 +7,10 @@ const messages = defineMessages({
     description: 'register page title',
   },
   // Field labels
+  "registration.organization.label" :{
+    id : "registration.organization.label",
+    defaultMessage : "Organization",
+  },
   'registration.fullname.label': {
     id: 'registration.fullname.label',
     defaultMessage: 'Full name',
@@ -96,10 +100,13 @@ const messages = defineMessages({
     defaultMessage: 'Enter your full name',
     description: 'Error message for empty fullname field',
   },
-  'empty.email.field.error': {
-    id: 'empty.email.field.error',
-    defaultMessage: 'Enter your email',
-    description: 'Error message for empty email field',
+  "empty.email.field.error" :{
+
+  },
+  'empty.organization.field.error': {
+    id: 'empty.organization.field.error',
+    defaultMessage: 'Enter your organization',
+ 
   },
   'email.do.not.match': {
     id: 'email.do.not.match',
