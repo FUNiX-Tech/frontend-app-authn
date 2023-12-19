@@ -16,6 +16,7 @@ import ruMessages from './messages/ru.json';
 import thMessages from './messages/th.json';
 import ukMessages from './messages/uk.json';
 import zhcnMessages from './messages/zh_CN.json';
+import viMessages from './messages/vi.json'
 
 const messages = {
   ar: arMessages,
@@ -36,6 +37,7 @@ const messages = {
   th: thMessages,
   uk: ukMessages,
   hi: hiMessages,
+  vi: viMessages
 };
 
 export default messages;

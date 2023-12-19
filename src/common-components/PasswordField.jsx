@@ -73,6 +73,16 @@ const PasswordField = (props) => {
           floatingLabel={props.floatingLabel}
         />
       </OverlayTrigger>
+      {props.errorMessage == '' && props.helpText ? (
+          <Form.Control.Feedback type="default" key="help-text" className="d-block form-text-size">
+            {props.helpText.map((message, index) => (
+              <span key={`help-text-${index.toString()}`}>
+                {message}
+                <br />
+              </span>
+            ))}
+          </Form.Control.Feedback>
+        ) : <div key="empty" />}
       {props.errorMessage !== '' && (
         <Form.Control.Feedback key="error" className="form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
           {props.errorMessage}

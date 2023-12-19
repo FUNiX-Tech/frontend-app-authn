@@ -158,10 +158,18 @@ $elevation-level-2-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
 .btn-oa2-google-oauth2 {
-  color: $white;
-  border-color: $google-blue;
-  background-color: $google-blue;
-
+  // color: $white;
+  // border-color: $google-blue;
+  // background-color: $google-blue;
+  border: 1px solid #D7D7D7;
+  background: linear-gradient(0deg, #FFFFFF, #FFFFFF),
+  linear-gradient(0deg, #D7D7D7, #D7D7D7);
+  padding: 8px 12px 8px 12px;
+  border-radius: 6px;
+  display: flex ;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
   .icon-image {
     margin-left: -6px;
     max-height: 34px;
@@ -171,9 +179,7 @@ $elevation-level-2-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
 
   &:hover,
   &:focus {
-    background-color: $google-focus-blue;
-    border: 1px solid $google-focus-blue;
-    color: $white;
+   
   }
 }
 
@@ -591,4 +597,29 @@ select.form-control {
 
 .pgn__form-control-decorator-trailing {
   right: 0 !important;
+}
+
+.form-footer{
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  span {
+   
+    font-size: 12px;
+    align-items: center;
+    line-height: 18px;
+  }
+}
+
+.navbar-login{
+  position: relative;
+  left: 50%;
+  bottom: 4%;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  span {
+ 
+  }
 }

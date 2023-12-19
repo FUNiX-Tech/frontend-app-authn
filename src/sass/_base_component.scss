@@ -9,7 +9,7 @@
   }
 
   @include media-breakpoint-up('xl') {
-    justify-content: space-between;
+    // justify-content: space-between;
   }
 }
 
@@ -17,7 +17,7 @@
   @include media-breakpoint-up('xl') {
     display: flex;
     justify-content: center;
-    width: 50vw;
+    width: 100%;
     margin-top: 4rem;
   }
 }

@@ -11,6 +11,7 @@ const messages = defineMessages({
     id : "registration.organization.label",
     defaultMessage : "Organization",
   },
+  
   'registration.fullname.label': {
     id: 'registration.fullname.label',
     defaultMessage: 'Full name',
@@ -42,6 +43,10 @@ const messages = defineMessages({
     description: 'Text for opt in option on register page.',
   },
   // Help text
+  "help.text.password" :{
+    id : "help.text.password",
+    defineMessages : "Password is at least 8 characters long and includes letters and numbers"
+  },
   'help.text.name': {
     id: 'help.text.name',
     defaultMessage: 'This name will be used by any certificates that you earn.',

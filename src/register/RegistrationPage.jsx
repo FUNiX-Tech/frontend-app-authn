@@ -72,6 +72,7 @@ class RegistrationPage extends React.Component {
     this.showDynamicRegistrationFields = getConfig().ENABLE_DYNAMIC_REGISTRATION_FIELDS;
     this.tpaHint = getTpaHint();
     const { registrationFormData } = this.props;
+    // console.log(registrationFormData)
     this.state = {
       country: 'VN',
       email: registrationFormData.email,
@@ -79,14 +80,14 @@ class RegistrationPage extends React.Component {
       password: registrationFormData.password,
       username: registrationFormData.username,
       marketingOptIn: registrationFormData.marketingOptIn,
-      org : '',
+      organization : '',
       errors: {
         email: registrationFormData.errors.email,
         name: registrationFormData.errors.name,
         username: registrationFormData.errors.username,
         password: registrationFormData.errors.password,
         // country: '',
-        org : ''
+        organization : registrationFormData.errors.organization
       },
       emailFieldBorderClass: registrationFormData.emailFieldBorderClass,
       emailErrorSuggestion: registrationFormData.emailErrorSuggestion,
@@ -245,7 +246,7 @@ class RegistrationPage extends React.Component {
       username: this.state.username,
       email: this.state.email,
       is_authn_mfe: true,
-      organization : this.state.org
+      organization : this.state.organization
     };
 
     if (this.props.thirdPartyAuthContext.currentProvider) {
@@ -274,8 +275,10 @@ class RegistrationPage extends React.Component {
       payload.country = 'VN';
       payload.honor_code = true;
     }
-
+    console.log('==========' , this.state.errors.organization)
+    // console.log('==========' , dynamicFieldErrorMessages)
     if (!this.isFormValid(payload, dynamicFieldErrorMessages)) {
+      // console.log('=============', payload)
       this.setState(prevState => ({
         errorCode: FORM_SUBMISSION_ERROR,
         failureCount: prevState.failureCount + 1,
@@ -290,18 +293,18 @@ class RegistrationPage extends React.Component {
     payload = snakeCaseObject(payload);
     payload.totalRegistrationTime = totalRegistrationTime;
     // add query params to the payload
-    // if (this.props.org){
+    // if (this.props.organization){
     //   payload = { ...payload, ...this.queryParams, organization: 'Staging' };
     // } else {
     //   payload = { ...payload, ...this.queryParams, organization: '' };
     // }
 
-    console.log('==========' , payload)
-    this.setState({
-      totalRegistrationTime,
-    }, () => {
-      this.props.registerNewUser(payload);
-    });
+    
+    // this.setState({
+    //   totalRegistrationTime,
+    // }, () => {
+    //   this.props.registerNewUser(payload);
+    // });
   }
 
   // handlerRegist (){
@@ -319,7 +322,7 @@ class RegistrationPage extends React.Component {
   //       country ,
   //       honor_code : true,
   //       next: '/' ,
-  //       organization : this.props.org ? this.props.org  : ''
+  //       organization : this.props.organization ? this.props.organization  : ''
   //     };
 
   //     console.log(payload)
@@ -352,7 +355,7 @@ class RegistrationPage extends React.Component {
       name: this.state.name,
       honor_code: true,
       // country: this.state.country,
-      org: this.state.org
+      organization: this.state.organization
 
     };
     this.validateInput(name, value, payload);
@@ -467,11 +470,11 @@ class RegistrationPage extends React.Component {
     const urlRegex = new RegExp(VALID_NAME_REGEX);
 
     switch (fieldName) {
-      // case "org" :
-      //   if (!value) {
-      //     errors.org = intl.formatMessage(messages['empty.organization.field.error']);
-      //   }
-      // break
+      case "organization" :
+        if (!value) {
+          errors.organization = intl.formatMessage(messages['empty.organization.field.error']);
+        }
+      break
       case 'email':
         if (!value) {
           errors.email = intl.formatMessage(messages['empty.email.field.error']);
@@ -655,6 +658,8 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
+ 
+   
     // if (
     //   this.props.thirdPartyAuthApiStatus == 'complete' && 
     //   this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
@@ -668,8 +673,10 @@ class RegistrationPage extends React.Component {
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="mt-4 mb-3 h4">
+          <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
             {intl.formatMessage(messages['registration.other.options.heading'])}
+            <span className=''></span>
           </div>
         )}
 
@@ -684,7 +691,7 @@ class RegistrationPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="">
                 <SocialAuthProviders socialAuthProviders={providers} referrer={REGISTER_PAGE} />
               </div>
             )}
@@ -701,6 +708,12 @@ class RegistrationPage extends React.Component {
     finishAuthUrl,
     submitState,
     intl) {
+      const { errors } = this.state;
+      const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
+  
+      const {email, password, name ,organization , username} = this.state
+      const isAllFieldsFilled = email.length > 0 && password.length > 0 && name.length > 0 && organization.length > 0 && username.length > 0;
+
     if (this.props.institutionLogin) {
       return (
         <InstitutionLogistration
@@ -836,6 +849,7 @@ class RegistrationPage extends React.Component {
               helpText={[intl.formatMessage(messages['help.text.name'])]}
               floatingLabel={intl.formatMessage(messages['registration.fullname.label'])}
             />
+            
             <FormGroup
               name="email"
               value={this.state.email}
@@ -860,7 +874,7 @@ class RegistrationPage extends React.Component {
               handleChange={this.handleOnChange}
               handleFocus={this.handleOnFocus}
               errorMessage={this.state.errors.username}
-              helpText={[intl.formatMessage(messages['help.text.username.1']), intl.formatMessage(messages['help.text.username.2'])]}
+              helpText={[intl.formatMessage(messages['help.text.username.1'])]}
               floatingLabel={intl.formatMessage(messages['registration.username.label'])}
               handleSuggestionClick={this.handleSuggestionClick}
               usernameSuggestions={this.props.usernameSuggestions}
@@ -876,9 +890,20 @@ class RegistrationPage extends React.Component {
                 handleChange={this.handleOnChange}
                 handleFocus={this.handleOnFocus}
                 errorMessage={this.state.errors.password}
+                helpText={[intl.formatMessage(messages['help.text.password'])]}
                 floatingLabel={intl.formatMessage(messages['registration.password.label'])}
               />
             )}
+            <FormGroup 
+              name='organization'
+              autoComplete='on'
+              value={this.state.organization}
+              handleBlur={this.handleOnBlur}
+              handleChange={this.handleOnChange}
+              handleFocus={this.handleOnFocus} 
+              errorMessage={this.state.errors.organization}
+              floatingLabel={intl.formatMessage(messages['registration.organization.label'])}
+              />
             {/* {!(this.showDynamicRegistrationFields)
             && (
               <CountryDropdown
@@ -893,17 +918,8 @@ class RegistrationPage extends React.Component {
                 errorCode={this.state.errorCode}
               />
             )} */}
-             <FormGroup name='org'
-              autoComplete='on'
-              value={this.state.org}
-              handleBlur={this.handleOnBlur}
-              handleChange={this.handleOnChange}
-              handleFocus={this.handleOnFocus} 
-              errorMessage={this.state.errors.org}
-              helpText={[intl.formatMessage(messages['help.text.name'])]}
-              floatingLabel={intl.formatMessage(messages['registration.organization.label'])}
-              />
-            {formFields}
+             
+            {/* {formFields}
             {(getConfig().MARKETING_EMAILS_OPT_IN)
             && (
               <Form.Checkbox
@@ -924,27 +940,39 @@ class RegistrationPage extends React.Component {
               <HonorCode
                 fieldType="tos_and_honor_code"
               />
-            ) : <div>{honorCode}</div>}
-            <StatefulButton
+            ) : <div>{honorCode}</div>} */}
+            
+              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty } onClick={this.handleSubmit}>
+                <span>Đăng ký</span>
+              </button>
+           
+            {/* <StatefulButton
               name="register-user"
               id="register-user"
               type="submit"
               variant="brand"
+              disabledStates={['unedited']}
               className="register-stateful-button-width mt-4 mb-4"
+              
               state={submitState}
+             
               labels={{
                 default: intl.formatMessage(messages['create.account.for.free.button']),
                 pending: '',
               }}
               onClick={this.handleSubmit}
-              onMouseDown={(e) => e.preventDefault()}
-            />
+              onMouseDown={(e) => e.preventDefault()} 
+            />*/}
             {this.renderThirdPartyAuth(providers,
               secondaryProviders,
               currentProvider,
               thirdPartyAuthApiStatus,
               intl)}
           </Form>
+          <div className='form-footer'>
+              <span>Bằng cách tạo tài khoản, bạn đồng ý với  </span>
+              <span><a href='' >Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a></span>
+          </div>
         </div>
       </>
     );

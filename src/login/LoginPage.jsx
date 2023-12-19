@@ -237,7 +237,7 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        <Helmet>
+        {/* <Helmet>
           <title>{intl.formatMessage(messages['login.page.title'],
             { siteName: getConfig().SITE_NAME })}
           </title>
@@ -246,9 +246,9 @@ class LoginPage extends React.Component {
           success={this.props.loginResult.success}
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
-        />
+        /> */}
         <div className="mw-xs mt-3">
-          {thirdPartyAuthContext.currentProvider
+          {/* {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert
               currentProvider={thirdPartyAuthContext.currentProvider}
@@ -258,7 +258,7 @@ class LoginPage extends React.Component {
           {this.props.loginError ? <LoginFailureMessage loginError={this.props.loginError} /> : null}
           {submitState === DEFAULT_STATE && this.state.isSubmitted ? windowScrollTo({ left: 0, top: 0, behavior: 'smooth' }) : null}
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
-          {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null}
+          {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null} */}
           <Form name="sign-in-form" id="sign-in-form">
             <FormGroup
               name="emailOrUsername"

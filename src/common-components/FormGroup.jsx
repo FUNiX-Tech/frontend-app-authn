@@ -44,7 +44,7 @@ const FormGroup = (props) => {
         {props.options ? props.options() : null}
       </Form.Control>
       <TransitionReplace>
-        {hasFocus && props.helpText ? (
+        {props.errorMessage == '' && props.helpText ? (
           <Form.Control.Feedback type="default" key="help-text" className="d-block form-text-size">
             {props.helpText.map((message, index) => (
               <span key={`help-text-${index.toString()}`}>
