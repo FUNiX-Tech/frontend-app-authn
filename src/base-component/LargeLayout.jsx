@@ -9,7 +9,7 @@ import bgAuthn from './assets/BG.png'
 
 const LargeLayout = ({ intl }) => (
   <div className="d-flex">
-    <img src={bgAuthn} alt='bg'  style={{minHeight:'100vh', width:'519px' }}/>
+    <img src={bgAuthn} alt='bg'  style={{ width:'519px' }}/>
     {/* <div className="col-md-9 " style={{backgroundColor:'#abc3df'}}>
       <Hyperlink destination={getConfig().MARKETING_SITE_BASE_URL}>
         <Image className="logo position-absolute" alt={getConfig().SITE_NAME} src={getConfig().LOGO_WHITE_URL} />

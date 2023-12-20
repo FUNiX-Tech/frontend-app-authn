@@ -22,7 +22,7 @@ const LoginPageNew = (props) => {
   return (
     <BaseComponent>
         
-      <div style={{textAlign: 'center', mminHeight:'921px', minWidth:'425px'}}>
+      <div style={{textAlign: 'center',  minWidth:'425px'}}>
         <div >
             <Image style={{width:'105px' , height:'64px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
             <div className='login-header'>
