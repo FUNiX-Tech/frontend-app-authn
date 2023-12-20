@@ -292,7 +292,7 @@ class LoginPage extends React.Component {
               errorLogin = {this.props.loginError}
             />
        
-                <Link className='forgot-password' to='/' > {intl.formatMessage(messages['forgot.password'])}</Link>
+                <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
            
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
                 <span>Đăng nhập</span>
