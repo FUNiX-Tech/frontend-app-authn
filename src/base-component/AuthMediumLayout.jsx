@@ -4,12 +4,16 @@ import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Hyperlink, Image } from '@edx/paragon';
 import PropTypes from 'prop-types';
-
+import bgAuthn from './assets/BG.png'
 import messages from './messages';
 
 const AuthMediumLayout = ({ intl, username }) => (
   <>
-    <div className="w-100 medium-screen-top-stripe" />
+    <div className="d-flex">
+    <img src={bgAuthn} alt='bg'  style={{ width:'519px' }}/>
+  
+  </div>
+    {/* <div className="w-100 medium-screen-top-stripe" />
     <div className="w-100 p-0 mb-3 d-flex">
       <div className="col-md-10 bg-light-200">
         <Hyperlink destination={getConfig().MARKETING_SITE_BASE_URL}>
@@ -37,7 +41,7 @@ const AuthMediumLayout = ({ intl, username }) => (
           </g>
         </svg>
       </div>
-    </div>
+    </div> */}
   </>
 );
 
