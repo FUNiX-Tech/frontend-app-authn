@@ -22,7 +22,7 @@ const LoginPageNew = (props) => {
   return (
     <BaseComponent>
         
-      <div style={{textAlign: 'center'}}>
+      <div style={{textAlign: 'center', mminHeight:'921px', minWidth:'425px'}}>
         <div >
             <Image style={{width:'105px' , height:'64px'}} className="" alt={getConfig().SITE_NAME} src={'https://test-xseries.funix.edu.vn/static/images/logo.e0d4b54fb4cb.png'} />
             <div>

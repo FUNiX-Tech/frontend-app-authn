@@ -63,3 +63,35 @@
         width: 76.5px;
     }
 }
+
+.error-text{
+  display: flex;
+  gap:8px;
+  background-color: #FFF5F5;
+  width: 416px;
+  height: 24px;
+  border-radius: 4px;
+  padding: 4px 8px 4px 8px;
+}
+
+.username-suggestion-custom{
+  border : none !important;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 400;
+  padding:2px 4px 2px 4px;
+  background-color: #F1F2F3;
+
+}
+
+.forgot-password{
+  display: block;
+  text-align: end;
+  color : #007AE6;
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 700;
+  margin-top: 10px;
+  padding-bottom: 12px;
+  text-decoration: underline;
+}

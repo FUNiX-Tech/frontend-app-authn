@@ -11,6 +11,7 @@ import PropTypes from 'prop-types';
 
 import { LETTER_REGEX, NUMBER_REGEX } from '../data/constants';
 import messages from './messages';
+import iconWarning from './assets/Warning.svg'
 
 const PasswordField = (props) => {
   const { formatMessage } = props.intl;
@@ -53,7 +54,7 @@ const PasswordField = (props) => {
       </span>
     </Tooltip>
   );
-
+    // console.log('========', props.errorLogin)
   return (
     <Form.Group controlId={props.name} isInvalid={props.errorMessage !== ''}>
       <OverlayTrigger key="tooltip" placement={placement} overlay={tooltip} show={showTooltip}>
@@ -84,9 +85,20 @@ const PasswordField = (props) => {
           </Form.Control.Feedback>
         ) : <div key="empty" />}
       {props.errorMessage !== '' && (
-        <Form.Control.Feedback key="error" className="form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
-          {props.errorMessage}
+        <Form.Control.Feedback key="error" className="error-text  form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
+          <span>
+            <img src={iconWarning} alt='warning' />
+          </span>
+         <span> {props.errorMessage}</span>
           <span className="sr-only">{formatMessage(messages['password.sr.only.helping.text'])}</span>
+        </Form.Control.Feedback>
+      )}
+      {props.errorLogin  && (
+        <Form.Control.Feedback key="error" className="error-text  form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
+          <span>
+            <img src={iconWarning} alt='warning' />
+          </span>
+          <span>mật khẩu không đúng. </span>
         </Form.Control.Feedback>
       )}
     </Form.Group>

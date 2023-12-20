@@ -11,7 +11,7 @@ import messages from './messages';
 import logoGoogle from './assets/Brand.svg'
 
 function SocialAuthProviders(props) {
-  const { intl, referrer, socialAuthProviders } = props;
+  const { intl, referrer, socialAuthProviders , login } = props;
   // console.log('==========', referrer , socialAuthProviders)
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,7 +31,7 @@ function SocialAuthProviders(props) {
       className={` w-100 btn-${provider.id} ${index % 2 === 0 ? 'mr-3' : ''}`}
       data-provider-url={referrer === LOGIN_PAGE ? provider.loginUrl : provider.registerUrl}
       onClick={handleSubmit}
-    > <img src={logoGoogle} alt='google' />Đăng ký bằng Google</button>
+    > <img src={logoGoogle} alt='google' /> {login? 'Tiếp tục bằng Google' : 'Đăng ký bằng Google'}</button>
       )
     }else {
       return (

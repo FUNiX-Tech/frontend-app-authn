@@ -106,7 +106,8 @@ const messages = defineMessages({
     description: 'Error message for empty fullname field',
   },
   "empty.email.field.error" :{
-
+    id : "empty.email.field.error",
+    defineMessages: "Enter your email"
   },
   'empty.organization.field.error': {
     id: 'empty.organization.field.error',

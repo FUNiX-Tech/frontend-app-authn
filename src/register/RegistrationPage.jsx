@@ -275,7 +275,7 @@ class RegistrationPage extends React.Component {
       payload.country = 'VN';
       payload.honor_code = true;
     }
-    console.log('==========' , this.state.errors.organization)
+    
     // console.log('==========' , dynamicFieldErrorMessages)
     if (!this.isFormValid(payload, dynamicFieldErrorMessages)) {
       // console.log('=============', payload)
@@ -292,6 +292,7 @@ class RegistrationPage extends React.Component {
 
     payload = snakeCaseObject(payload);
     payload.totalRegistrationTime = totalRegistrationTime;
+    console.log('==========' , payload)
     // add query params to the payload
     // if (this.props.organization){
     //   payload = { ...payload, ...this.queryParams, organization: 'Staging' };
@@ -300,11 +301,11 @@ class RegistrationPage extends React.Component {
     // }
 
     
-    // this.setState({
-    //   totalRegistrationTime,
-    // }, () => {
-    //   this.props.registerNewUser(payload);
-    // });
+    this.setState({
+      totalRegistrationTime,
+    }, () => {
+      this.props.registerNewUser(payload);
+    });
   }
 
   // handlerRegist (){
@@ -819,7 +820,7 @@ class RegistrationPage extends React.Component {
                  && Object.keys(this.props.optionalFields).length !== 0}
         />
         <div className="mw-xs mt-3">
-          {this.state.errorCode ? (
+          {/* {this.state.errorCode ? (
             <RegistrationFailure
               errorCode={this.state.errorCode}
               failureCount={this.state.failureCount}
@@ -835,7 +836,7 @@ class RegistrationPage extends React.Component {
               />
               <h4 className="mt-4 mb-4">{intl.formatMessage(messages['registration.using.tpa.form.heading'])}</h4>
             </>
-          )}
+          )} */}
           <Form id="registration-form" name="registration-form">
            
             <FormGroup
