@@ -112,3 +112,22 @@
 
   }
 }
+.login-header{
+  h1 {
+    font-size: 32px;
+    line-height: 48px;
+    font-family: Roboto serif;
+  }
+  span {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  a{
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    font-weight: 500;
+    color : #007AE6;
+  }
+}

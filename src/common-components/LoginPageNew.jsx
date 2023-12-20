@@ -24,8 +24,8 @@ const LoginPageNew = (props) => {
         
       <div style={{textAlign: 'center', mminHeight:'921px', minWidth:'425px'}}>
         <div >
-            <Image style={{width:'105px' , height:'64px'}} className="" alt={getConfig().SITE_NAME} src={'https://test-xseries.funix.edu.vn/static/images/logo.e0d4b54fb4cb.png'} />
-            <div>
+            <Image style={{width:'105px' , height:'64px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
+            <div className='login-header'>
                 <h1>{ intl.formatMessage(messages['home.auth.account'])}</h1>
                 <span>
                     <span>{intl.formatMessage(messages['login.auth.not.account'])} </span>
