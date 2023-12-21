@@ -11,7 +11,7 @@ import { Institution } from '@edx/paragon/icons';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import Skeleton from 'react-loading-skeleton';
-import { Link } from 'react-router-dom';
+import { Link , withRouter} from 'react-router-dom';
 
 import {
   FormGroup, InstitutionLogistration, PasswordField, RedirectLogistration,
@@ -122,6 +122,7 @@ class LoginPage extends React.Component {
       email_or_username: emailOrUsername, password, ...this.queryParams,
     };
     this.props.loginRequest(payload);
+   
   }
 
   handleOnFocus = (e) => {
@@ -162,6 +163,8 @@ class LoginPage extends React.Component {
 
     return errors.password;
   }
+
+ 
 
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
@@ -231,11 +234,12 @@ class LoginPage extends React.Component {
         />
       );
     }
+    
 
     if (this.props.loginResult.success) {
       setSurveyCookie('login');
-
-      // Fire optimizely events
+      window.location.reload()
+      // Fire optimizely events 
       window.optimizely = window.optimizely || [];
       window.optimizely.push({
         type: 'event',

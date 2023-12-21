@@ -37,8 +37,8 @@ const MainApp = () => (
       <UnAuthOnlyRoute exact path={LOGIN_PAGE} render={() => <LoginPageNew selectedPage={LOGIN_PAGE}  />} /> 
       {/* <UnAuthOnlyRoute exact path={REGISTER_PAGE} component={Logistration} /> */}
       <UnAuthOnlyRoute exact path={REGISTER_PAGE} render={()=><RegisterPageNew selectedPage={REGISTER_PAGE} />} />
-      <UnAuthOnlyRoute exact path='/confirmation' render={()=><ConfirmationPage />} />
       <UnAuthOnlyRoute exact path={RESET_PAGE} render={()=><ForgotPassword  />} />
+      <Route exact path='/confirmation' render={()=><ConfirmationPage />} />
       <Route exact path={PASSWORD_RESET_CONFIRM} component={ResetPasswordPage} />
       <Route exact path={WELCOME_PAGE} component={ProgressiveProfiling} />
       <Route path={PAGE_NOT_FOUND} component={NotFoundPage} />
