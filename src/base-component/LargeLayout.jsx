@@ -4,12 +4,13 @@ import { getConfig } from '@edx/frontend-platform';
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import { Hyperlink, Image } from '@edx/paragon';
 import classNames from 'classnames';
-
 import messages from './messages';
+import bgAuthn from './assets/BG.png'
 
 const LargeLayout = ({ intl }) => (
-  <div className="w-50 d-flex">
-    <div className="col-md-9 " style={{backgroundColor:'#abc3df'}}>
+  <div className="d-flex">
+    <img src={bgAuthn} alt='bg'  style={{ width:'519px' }}/>
+    {/* <div className="col-md-9 " style={{backgroundColor:'#abc3df'}}>
       <Hyperlink destination={getConfig().MARKETING_SITE_BASE_URL}>
         <Image className="logo position-absolute" alt={getConfig().SITE_NAME} src={getConfig().LOGO_WHITE_URL} />
       </Hyperlink>
@@ -35,7 +36,7 @@ const LargeLayout = ({ intl }) => (
           <rect x="0" y="0" height="100%" width="100%" />
         </g>
       </svg>
-    </div>
+    </div> */}
   </div>
 );
 

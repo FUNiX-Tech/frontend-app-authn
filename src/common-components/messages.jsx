@@ -128,6 +128,18 @@ const messages = defineMessages({
     description: 'Message that appears on register page if user has successfully authenticated with TPA '
                   + 'but no associated platform account exists',
   },
+  "home.auth.account" :{
+    id : 'home.auth.account',
+    defaultMessage: 'Welcome back',
+  },
+  "login.auth.not.account" :{
+    id : 'login.auth.not.account',
+    defaultMessage : 'Do not have an account?'
+  },
+  "register.auth.account.now" :{
+    id : "register.auth.account.now",
+    defineMessages : "Register now"
+  }
 });
 
 export default messages;

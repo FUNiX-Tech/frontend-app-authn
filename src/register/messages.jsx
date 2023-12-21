@@ -7,6 +7,11 @@ const messages = defineMessages({
     description: 'register page title',
   },
   // Field labels
+  "registration.organization.label" :{
+    id : "registration.organization.label",
+    defaultMessage : "Organization",
+  },
+  
   'registration.fullname.label': {
     id: 'registration.fullname.label',
     defaultMessage: 'Full name',
@@ -38,6 +43,10 @@ const messages = defineMessages({
     description: 'Text for opt in option on register page.',
   },
   // Help text
+  "help.text.password" :{
+    id : "help.text.password",
+    defineMessages : "Password is at least 8 characters long and includes letters and numbers"
+  },
   'help.text.name': {
     id: 'help.text.name',
     defaultMessage: 'This name will be used by any certificates that you earn.',
@@ -96,10 +105,14 @@ const messages = defineMessages({
     defaultMessage: 'Enter your full name',
     description: 'Error message for empty fullname field',
   },
-  'empty.email.field.error': {
-    id: 'empty.email.field.error',
-    defaultMessage: 'Enter your email',
-    description: 'Error message for empty email field',
+  "empty.email.field.error" :{
+    id : "empty.email.field.error",
+    defineMessages: "Enter your email"
+  },
+  'empty.organization.field.error': {
+    id: 'empty.organization.field.error',
+    defaultMessage: 'Enter your organization',
+ 
   },
   'email.do.not.match': {
     id: 'email.do.not.match',

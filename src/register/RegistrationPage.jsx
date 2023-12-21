@@ -72,19 +72,22 @@ class RegistrationPage extends React.Component {
     this.showDynamicRegistrationFields = getConfig().ENABLE_DYNAMIC_REGISTRATION_FIELDS;
     this.tpaHint = getTpaHint();
     const { registrationFormData } = this.props;
+    // console.log(registrationFormData)
     this.state = {
-      country: '',
+      country: 'VN',
       email: registrationFormData.email,
       name: registrationFormData.name,
       password: registrationFormData.password,
       username: registrationFormData.username,
       marketingOptIn: registrationFormData.marketingOptIn,
+      organization : '',
       errors: {
         email: registrationFormData.errors.email,
         name: registrationFormData.errors.name,
         username: registrationFormData.errors.username,
         password: registrationFormData.errors.password,
-        country: '',
+        // country: '',
+        organization : registrationFormData.errors.organization
       },
       emailFieldBorderClass: registrationFormData.emailFieldBorderClass,
       emailErrorSuggestion: registrationFormData.emailErrorSuggestion,
@@ -98,7 +101,7 @@ class RegistrationPage extends React.Component {
       focusedField: '',
     };
   }
-
+ 
   componentDidMount() {
     sendPageEvent('login_and_registration', 'register');
     const payload = { ...this.queryParams };
@@ -204,7 +207,7 @@ class RegistrationPage extends React.Component {
           : (registrationFormData.email || pipelineUserDetails.email || ''),
         username: registrationFormData.errors.username ? registrationFormData.username
           : (registrationFormData.username || pipelineUserDetails.username || ''),
-        country: registrationFormData.country || nextProps.thirdPartyAuthContext.countryCode,
+        // country: registrationFormData.country || nextProps.thirdPartyAuthContext.countryCode,
       });
       return false;
     }
@@ -243,6 +246,7 @@ class RegistrationPage extends React.Component {
       username: this.state.username,
       email: this.state.email,
       is_authn_mfe: true,
+      organization : this.state.organization
     };
 
     if (this.props.thirdPartyAuthContext.currentProvider) {
@@ -268,11 +272,13 @@ class RegistrationPage extends React.Component {
         payload[FIELDS.HONOR_CODE] = true;
       }
     } else {
-      payload.country = this.state.country;
+      payload.country = 'VN';
       payload.honor_code = true;
     }
-
+    
+    // console.log('==========' , dynamicFieldErrorMessages)
     if (!this.isFormValid(payload, dynamicFieldErrorMessages)) {
+      // console.log('=============', payload)
       this.setState(prevState => ({
         errorCode: FORM_SUBMISSION_ERROR,
         failureCount: prevState.failureCount + 1,
@@ -286,13 +292,15 @@ class RegistrationPage extends React.Component {
 
     payload = snakeCaseObject(payload);
     payload.totalRegistrationTime = totalRegistrationTime;
+    console.log('==========' , payload)
     // add query params to the payload
-    if (this.props.org){
-      payload = { ...payload, ...this.queryParams, organization: 'Staging' };
-    } else {
-      payload = { ...payload, ...this.queryParams, organization: '' };
-    }
+    // if (this.props.organization){
+    //   payload = { ...payload, ...this.queryParams, organization: 'Staging' };
+    // } else {
+    //   payload = { ...payload, ...this.queryParams, organization: '' };
+    // }
 
+    
     this.setState({
       totalRegistrationTime,
     }, () => {
@@ -300,30 +308,32 @@ class RegistrationPage extends React.Component {
     });
   }
 
-  handlerRegist (){
-    const { startTime } = this.state;
-      const {email, name, username} = this.props.registrationFormData
-      const country = this.state.country
-      const totalRegistrationTime = (Date.now() - startTime) / 1000;
-      let payload = {
-        name: name,
-        username: username,
-        email: email,
-        is_authn_mfe: true,
-        social_auth_provider : 'Google',
-        totalRegistrationTime ,
-        country ,
-        honor_code : true,
-        next: '/' ,
-        organization : this.props.org ? 'Staging' : ''
-      };
+  // handlerRegist (){
+  //   const { startTime } = this.state;
+  //     const {email, name, username} = this.props.registrationFormData
+  //     const country = this.state.country
+  //     const totalRegistrationTime = (Date.now() - startTime) / 1000;
+  //     let payload = {
+  //       name: name,
+  //       username: username,
+  //       email: email,
+  //       is_authn_mfe: true,
+  //       social_auth_provider : 'Google',
+  //       totalRegistrationTime ,
+  //       country ,
+  //       honor_code : true,
+  //       next: '/' ,
+  //       organization : this.props.organization ? this.props.organization  : ''
+  //     };
+
+  //     console.log(payload)
    
-   this.setState({
-      totalRegistrationTime,
-    }, () => {
-      this.props.registerNewUser(payload);
-    });
-  }
+  // //  this.setState({
+  // //     totalRegistrationTime,
+  // //   }, () => {
+  // //     this.props.registerNewUser(payload);
+  // //   });
+  // }
 
 
   handleOnBlur = (e) => {
@@ -345,7 +355,8 @@ class RegistrationPage extends React.Component {
       password: this.state.password,
       name: this.state.name,
       honor_code: true,
-      country: this.state.country,
+      // country: this.state.country,
+      organization: this.state.organization
 
     };
     this.validateInput(name, value, payload);
@@ -378,9 +389,9 @@ class RegistrationPage extends React.Component {
     if (fieldName === 'username') {
       this.props.clearUsernameSuggestions();
     }
-    if (fieldName === 'countryExpand') {
-      errors.country = '';
-    }
+    // if (fieldName === 'countryExpand') {
+    //   errors.country = '';
+    // }
     if (fieldName === 'passwordValidation') {
       errors.password = '';
     }
@@ -460,6 +471,11 @@ class RegistrationPage extends React.Component {
     const urlRegex = new RegExp(VALID_NAME_REGEX);
 
     switch (fieldName) {
+      case "organization" :
+        if (!value) {
+          errors.organization = intl.formatMessage(messages['empty.organization.field.error']);
+        }
+      break
       case 'email':
         if (!value) {
           errors.email = intl.formatMessage(messages['empty.email.field.error']);
@@ -557,30 +573,30 @@ class RegistrationPage extends React.Component {
           this.props.fetchRealtimeValidations(payload);
         }
         break;
-      case 'country':
-        value = value.trim(); // eslint-disable-line no-param-reassign
-        if (value) {
-          const normalizedValue = value.toLowerCase();
-          let selectedCountry = (
-            this.countryList.find((o) => o[COUNTRY_DISPLAY_KEY].toLowerCase().trim() === normalizedValue));
-          if (selectedCountry) {
-            value = selectedCountry[COUNTRY_CODE_KEY]; // eslint-disable-line no-param-reassign
-            errors.country = '';
-            break;
-          } else {
-            // Handling a case here where user enters a valid country code that needs to be
-            // evaluated and set its value as a valid value.
-            selectedCountry = (
-              this.countryList.find((o) => o[COUNTRY_CODE_KEY].toLowerCase().trim() === normalizedValue));
-            if (selectedCountry) {
-              value = selectedCountry[COUNTRY_CODE_KEY]; // eslint-disable-line no-param-reassign
-              errors.country = '';
-              break;
-            }
-          }
-        }
-        errors.country = intl.formatMessage(messages['empty.country.field.error']);
-        break;
+      // case 'country':
+      //   value = value.trim(); // eslint-disable-line no-param-reassign
+      //   if (value) {
+      //     const normalizedValue = value.toLowerCase();
+      //     let selectedCountry = (
+      //       this.countryList.find((o) => o[COUNTRY_DISPLAY_KEY].toLowerCase().trim() === normalizedValue));
+      //     if (selectedCountry) {
+      //       value = selectedCountry[COUNTRY_CODE_KEY]; // eslint-disable-line no-param-reassign
+      //       errors.country = '';
+      //       break;
+      //     } else {
+      //       // Handling a case here where user enters a valid country code that needs to be
+      //       // evaluated and set its value as a valid value.
+      //       selectedCountry = (
+      //         this.countryList.find((o) => o[COUNTRY_CODE_KEY].toLowerCase().trim() === normalizedValue));
+      //       if (selectedCountry) {
+      //         value = selectedCountry[COUNTRY_CODE_KEY]; // eslint-disable-line no-param-reassign
+      //         errors.country = '';
+      //         break;
+      //       }
+      //     }
+      //   }
+      //   errors.country = intl.formatMessage(messages['empty.country.field.error']);
+      //   break;
       default:
         break;
     }
@@ -643,21 +659,25 @@ class RegistrationPage extends React.Component {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;
-    if (
-      this.props.thirdPartyAuthApiStatus == 'complete' && 
-      this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
-      !this.state.hasRunHandler
-      && this.props.registrationFormData.email.length > 0
+ 
+   
+    // if (
+    //   this.props.thirdPartyAuthApiStatus == 'complete' && 
+    //   this.props.thirdPartyAuthContext.currentProvider === 'Google' &&
+    //   !this.state.hasRunHandler
+    //   && this.props.registrationFormData.email.length > 0
 
-    ) {
-      this.handlerRegist()
-      this.setState(prevState => ({ hasRunHandler: true }));
-    }
+    // ) {
+    //   this.handlerRegist()
+    //   this.setState(prevState => ({ hasRunHandler: true }));
+    // }
     return (
       <>
         {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="mt-4 mb-3 h4">
+          <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
             {intl.formatMessage(messages['registration.other.options.heading'])}
+            <span className=''></span>
           </div>
         )}
 
@@ -672,7 +692,7 @@ class RegistrationPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="">
                 <SocialAuthProviders socialAuthProviders={providers} referrer={REGISTER_PAGE} />
               </div>
             )}
@@ -689,6 +709,12 @@ class RegistrationPage extends React.Component {
     finishAuthUrl,
     submitState,
     intl) {
+      const { errors } = this.state;
+      const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
+  
+      const {email, password, name ,organization , username} = this.state
+      const isAllFieldsFilled = email.length > 0  && name.length > 0 && organization.length > 0 && username.length > 0;
+
     if (this.props.institutionLogin) {
       return (
         <InstitutionLogistration
@@ -722,7 +748,7 @@ class RegistrationPage extends React.Component {
           case FIELDS.COUNTRY:
             return (
               <span key={fieldData.name}>
-                <CountryDropdown
+                {/* <CountryDropdown
                   name="country"
                   floatingLabel={intl.formatMessage(messages['registration.country.label'])}
                   options={this.countryList}
@@ -734,7 +760,7 @@ class RegistrationPage extends React.Component {
                     (value) => this.setState(prevState => ({ values: { ...prevState.values, country: value } }))
                   }
                   errorCode={this.state.errorCode}
-                />
+                /> */}
               </span>
             );
           case FIELDS.HONOR_CODE:
@@ -794,7 +820,7 @@ class RegistrationPage extends React.Component {
                  && Object.keys(this.props.optionalFields).length !== 0}
         />
         <div className="mw-xs mt-3">
-          {this.state.errorCode ? (
+          {/* {this.state.errorCode ? (
             <RegistrationFailure
               errorCode={this.state.errorCode}
               failureCount={this.state.failureCount}
@@ -810,8 +836,9 @@ class RegistrationPage extends React.Component {
               />
               <h4 className="mt-4 mb-4">{intl.formatMessage(messages['registration.using.tpa.form.heading'])}</h4>
             </>
-          )}
+          )} */}
           <Form id="registration-form" name="registration-form">
+           
             <FormGroup
               name="name"
               value={this.state.name}
@@ -823,6 +850,7 @@ class RegistrationPage extends React.Component {
               helpText={[intl.formatMessage(messages['help.text.name'])]}
               floatingLabel={intl.formatMessage(messages['registration.fullname.label'])}
             />
+            
             <FormGroup
               name="email"
               value={this.state.email}
@@ -847,7 +875,7 @@ class RegistrationPage extends React.Component {
               handleChange={this.handleOnChange}
               handleFocus={this.handleOnFocus}
               errorMessage={this.state.errors.username}
-              helpText={[intl.formatMessage(messages['help.text.username.1']), intl.formatMessage(messages['help.text.username.2'])]}
+              helpText={[intl.formatMessage(messages['help.text.username.1'])]}
               floatingLabel={intl.formatMessage(messages['registration.username.label'])}
               handleSuggestionClick={this.handleSuggestionClick}
               usernameSuggestions={this.props.usernameSuggestions}
@@ -863,10 +891,21 @@ class RegistrationPage extends React.Component {
                 handleChange={this.handleOnChange}
                 handleFocus={this.handleOnFocus}
                 errorMessage={this.state.errors.password}
+                helpText={[intl.formatMessage(messages['help.text.password'])]}
                 floatingLabel={intl.formatMessage(messages['registration.password.label'])}
               />
             )}
-            {!(this.showDynamicRegistrationFields)
+            <FormGroup 
+              name='organization'
+              autoComplete='on'
+              value={this.state.organization}
+              handleBlur={this.handleOnBlur}
+              handleChange={this.handleOnChange}
+              handleFocus={this.handleOnFocus} 
+              errorMessage={this.state.errors.organization}
+              floatingLabel={intl.formatMessage(messages['registration.organization.label'])}
+              />
+            {/* {!(this.showDynamicRegistrationFields)
             && (
               <CountryDropdown
                 name="country"
@@ -879,8 +918,9 @@ class RegistrationPage extends React.Component {
                 errorMessage={this.state.errors.country}
                 errorCode={this.state.errorCode}
               />
-            )}
-            {formFields}
+            )} */}
+             
+            {/* {formFields}
             {(getConfig().MARKETING_EMAILS_OPT_IN)
             && (
               <Form.Checkbox
@@ -895,44 +935,45 @@ class RegistrationPage extends React.Component {
               </Form.Checkbox>
             )}
             
-              {/* {this.props.org &&  <SelectOrg
-                name="organization"
-                floatingLabel='Organization'
-                options={[{code:'123', name:'funix'}]}
-                value={this.state.organization}
-                autoComplete="on"
-                handleBlur={this.handleOnBlur}
-                handleFocus={this.handleOnFocus}
-                errorMessage={this.state.errors.organization}
-                handleChange={this.handleOnChange}
-                // errorCode={this.state.errorCode}
-              />} */}
+              
 
             {!(this.showDynamicRegistrationFields) ? (
               <HonorCode
                 fieldType="tos_and_honor_code"
               />
-            ) : <div>{honorCode}</div>}
-            <StatefulButton
+            ) : <div>{honorCode}</div>} */}
+            
+              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty } onClick={this.handleSubmit}>
+                <span>Đăng ký</span>
+              </button>
+           
+            {/* <StatefulButton
               name="register-user"
               id="register-user"
               type="submit"
               variant="brand"
+              disabledStates={['unedited']}
               className="register-stateful-button-width mt-4 mb-4"
+              
               state={submitState}
+             
               labels={{
                 default: intl.formatMessage(messages['create.account.for.free.button']),
                 pending: '',
               }}
               onClick={this.handleSubmit}
-              onMouseDown={(e) => e.preventDefault()}
-            />
+              onMouseDown={(e) => e.preventDefault()} 
+            />*/}
             {this.renderThirdPartyAuth(providers,
               secondaryProviders,
               currentProvider,
               thirdPartyAuthApiStatus,
               intl)}
           </Form>
+          <div className='form-footer'>
+              <span>Bằng cách tạo tài khoản, bạn đồng ý với  </span>
+              <span><a href='' >Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a></span>
+          </div>
         </div>
       </>
     );
