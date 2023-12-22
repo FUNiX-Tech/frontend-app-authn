@@ -8,10 +8,11 @@ import PropTypes from 'prop-types';
 
 import { LOGIN_PAGE, SUPPORTED_ICON_CLASSES } from '../data/constants';
 import messages from './messages';
+import logoGoogle from './assets/Brand.svg'
 
 function SocialAuthProviders(props) {
-  const { intl, referrer, socialAuthProviders } = props;
-
+  const { intl, referrer, socialAuthProviders , login } = props;
+  // console.log('==========', referrer , socialAuthProviders)
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -19,8 +20,22 @@ function SocialAuthProviders(props) {
     window.location.href = getConfig().LMS_BASE_URL + url;
   }
 
-  const socialAuth = socialAuthProviders.map((provider, index) => (
-    <button
+  const socialAuth = socialAuthProviders.map((provider, index) => {
+    
+    if (provider.name === 'Google') {
+      return (
+        <button
+      id={provider.id}
+      key={provider.id}
+      type="button"
+      className={` w-100 btn-${provider.id} ${index % 2 === 0 ? 'mr-3' : ''}`}
+      data-provider-url={referrer === LOGIN_PAGE ? provider.loginUrl : provider.registerUrl}
+      onClick={handleSubmit}
+    > <img src={logoGoogle} alt='google' /> {login? 'Tiếp tục bằng Google' : 'Đăng ký bằng Google'}</button>
+      )
+    }else {
+      return (
+        <button
       id={provider.id}
       key={provider.id}
       type="button"
@@ -49,7 +64,10 @@ function SocialAuthProviders(props) {
           : intl.formatMessage(messages['sso.create.account.using'], { providerName: provider.name })}
       </span>
     </button>
-  ));
+      )
+    }
+    
+  });
 
   return <>{socialAuth}</>;
 }

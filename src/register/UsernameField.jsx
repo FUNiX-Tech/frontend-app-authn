@@ -10,6 +10,10 @@ import messages from './messages';
 
 const UsernameField = (props) => {
   const { intl, usernameSuggestions, errorMessage } = props;
+  const testUser = [
+    "asdwqe123123_2",
+    "asdwqe123123_25",
+]
   let className = '';
   let suggestedUsernameDiv = <></>;
   let iconButton = <></>;
@@ -22,7 +26,7 @@ const UsernameField = (props) => {
             type="button"
             name="username"
             variant="outline-dark"
-            className="username-suggestion data-hj-suppress"
+            className="username-suggestion-custom"
             autoComplete={props.autoComplete}
             key={`suggestion-${index.toString()}`}
             onClick={(e) => props.handleSuggestionClick(e, username)}
@@ -45,6 +49,7 @@ const UsernameField = (props) => {
   } else if (usernameSuggestions.length > 0 && errorMessage) {
     suggestedUsernameDiv = suggestedUsernames();
   }
+ 
   return (
     <FormGroup {...props}>
       {suggestedUsernameDiv}

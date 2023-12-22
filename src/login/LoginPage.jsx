@@ -11,7 +11,7 @@ import { Institution } from '@edx/paragon/icons';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import Skeleton from 'react-loading-skeleton';
-import { Link } from 'react-router-dom';
+import { Link , withRouter} from 'react-router-dom';
 
 import {
   FormGroup, InstitutionLogistration, PasswordField, RedirectLogistration,
@@ -122,6 +122,7 @@ class LoginPage extends React.Component {
       email_or_username: emailOrUsername, password, ...this.queryParams,
     };
     this.props.loginRequest(payload);
+   
   }
 
   handleOnFocus = (e) => {
@@ -163,6 +164,8 @@ class LoginPage extends React.Component {
     return errors.password;
   }
 
+ 
+
   renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
@@ -172,17 +175,20 @@ class LoginPage extends React.Component {
       <>
         {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
           && (
-            <div className="mt-4 mb-3 h4">
-              {intl.formatMessage(messages['login.other.options.heading'])}
-            </div>
+  
+            <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
+            {intl.formatMessage(messages['login.other.options.heading'])}
+            <span className=''></span>
+          </div>
           )}
 
-        {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
+        {/* {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
           <Hyperlink className="btn btn-link btn-sm text-body p-0 mb-4" destination={this.getEnterPriseLoginURL()}>
             <Icon src={Institution} className="institute-icon" />
             {intl.formatMessage(messages['enterprise.login.btn.text'])}
           </Hyperlink>
-        )}
+        )} */}
 
         {thirdPartyAuthApiStatus === PENDING_STATE ? (
           <Skeleton className="tpa-skeleton mb-3" height={30} count={2} />
@@ -196,7 +202,7 @@ class LoginPage extends React.Component {
             )}
             {isSocialAuthActive && (
               <div className="row m-0">
-                <SocialAuthProviders socialAuthProviders={providers} />
+                <SocialAuthProviders socialAuthProviders={providers} login />
               </div>
             )}
           </>
@@ -214,6 +220,11 @@ class LoginPage extends React.Component {
     submitState,
     intl,
   ) {
+    const {errors} = this.state
+    const {emailOrUsername , password} = this.state
+    const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
+    const isAllFieldsFilled = emailOrUsername.length > 0 && password.length > 0
+    // console.log('=======', this.props.loginError)
     const activationMsgType = getActivationStatus();
     if (this.props.institutionLogin) {
       return (
@@ -223,11 +234,12 @@ class LoginPage extends React.Component {
         />
       );
     }
+    
 
     if (this.props.loginResult.success) {
       setSurveyCookie('login');
-
-      // Fire optimizely events
+      window.location.reload()
+      // Fire optimizely events 
       window.optimizely = window.optimizely || [];
       window.optimizely.push({
         type: 'event',
@@ -237,7 +249,7 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        <Helmet>
+        {/* <Helmet>
           <title>{intl.formatMessage(messages['login.page.title'],
             { siteName: getConfig().SITE_NAME })}
           </title>
@@ -246,9 +258,9 @@ class LoginPage extends React.Component {
           success={this.props.loginResult.success}
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
-        />
+        /> */}
         <div className="mw-xs mt-3">
-          {thirdPartyAuthContext.currentProvider
+          {/* {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert
               currentProvider={thirdPartyAuthContext.currentProvider}
@@ -258,7 +270,7 @@ class LoginPage extends React.Component {
           {this.props.loginError ? <LoginFailureMessage loginError={this.props.loginError} /> : null}
           {submitState === DEFAULT_STATE && this.state.isSubmitted ? windowScrollTo({ left: 0, top: 0, behavior: 'smooth' }) : null}
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
-          {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null}
+          {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null} */}
           <Form name="sign-in-form" id="sign-in-form">
             <FormGroup
               name="emailOrUsername"
@@ -269,6 +281,7 @@ class LoginPage extends React.Component {
               handleBlur={this.handleOnBlur}
               errorMessage={this.state.errors.emailOrUsername}
               floatingLabel={intl.formatMessage(messages['login.user.identity.label'])}
+              errorLogin = {this.props.loginError}
             />
             <PasswordField
               name="password"
@@ -280,8 +293,15 @@ class LoginPage extends React.Component {
               handleBlur={this.handleOnBlur}
               errorMessage={this.state.errors.password}
               floatingLabel={intl.formatMessage(messages['login.password.label'])}
+              errorLogin = {this.props.loginError}
             />
-            <StatefulButton
+       
+                <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
+           
+              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
+                <span>Đăng nhập</span>
+              </button>
+            {/* <StatefulButton
               name="sign-in"
               id="sign-in"
               type="submit"
@@ -294,8 +314,8 @@ class LoginPage extends React.Component {
               }}
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()}
-            />
-            <Link
+            /> */}
+            {/* <Link
               id="forgot-password"
               name="forgot-password"
               className="btn btn-link font-weight-500 text-body"
@@ -303,7 +323,7 @@ class LoginPage extends React.Component {
               onClick={this.handleForgotPasswordLinkClickEvent}
             >
               {intl.formatMessage(messages['forgot.password'])}
-            </Link>
+            </Link> */}
             {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
           </Form>
         </div>

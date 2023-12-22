@@ -4,6 +4,7 @@ import {
   Form, TransitionReplace,
 } from '@edx/paragon';
 import PropTypes from 'prop-types';
+import iconWarning from './assets/Warning.svg'
 
 const FormGroup = (props) => {
   const [hasFocus, setHasFocus] = useState(false);
@@ -19,7 +20,12 @@ const FormGroup = (props) => {
     setHasFocus(false);
     if (props.handleBlur) { props.handleBlur(e); }
   };
+ 
+ 
+  
 
+  console.log(props.errorLogin)
+  
   return (
     <Form.Group controlId={props.name} className={props.className} isInvalid={props.errorMessage !== ''}>
       <Form.Control
@@ -44,7 +50,7 @@ const FormGroup = (props) => {
         {props.options ? props.options() : null}
       </Form.Control>
       <TransitionReplace>
-        {hasFocus && props.helpText ? (
+        {props.errorMessage == '' && props.helpText ? (
           <Form.Control.Feedback type="default" key="help-text" className="d-block form-text-size">
             {props.helpText.map((message, index) => (
               <span key={`help-text-${index.toString()}`}>
@@ -56,8 +62,23 @@ const FormGroup = (props) => {
         ) : <div key="empty" />}
       </TransitionReplace>
       {props.errorMessage !== '' && (
-        <Form.Control.Feedback key="error" className="form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">{props.errorMessage}</Form.Control.Feedback>
+        <Form.Control.Feedback key="error" className="error-text form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
+          <span>
+            <img src={iconWarning} alt='warning' />
+          </span>
+          <span>
+            {props.errorMessage}
+          </span>
+          </Form.Control.Feedback>
       )}
+      {props.errorLogin?.email == false && <Form.Control.Feedback key="error" className="error-text form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
+          <span>
+            <img src={iconWarning} alt='warning' />
+          </span>
+          <span>
+          Địa chỉ email hoặc user không chính xác, vui lòng nhập lại 
+          </span>
+          </Form.Control.Feedback>}
       {props.children}
     </Form.Group>
   );

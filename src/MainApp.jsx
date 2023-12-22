@@ -17,6 +17,10 @@ import ForgotPasswordPage from './forgot-password';
 import ResetPasswordPage from './reset-password';
 import { ProgressiveProfiling } from './welcome';
 import './index.scss';
+import LoginPageNew from './common-components/LoginPageNew';
+import RegisterPageNew from './register/RegisterPageNew';
+import ConfirmationPage from './base-component/ConfirmationPage';
+import ForgotPassword from './reset-password/ForgotPassword';
 
 registerIcons();
 
@@ -27,11 +31,14 @@ const MainApp = () => (
     </Helmet>
     <Switch>
       <Route exact path="/">
-        <Redirect to={updatePathWithQueryParams(REGISTER_PAGE)} />
+        <Redirect to={updatePathWithQueryParams(LOGIN_PAGE)} />
       </Route>
-      <UnAuthOnlyRoute exact path={LOGIN_PAGE} render={() => <Logistration selectedPage={LOGIN_PAGE} />} />
-      <UnAuthOnlyRoute exact path={REGISTER_PAGE} component={Logistration} />
-      <UnAuthOnlyRoute exact path={RESET_PAGE} component={ForgotPasswordPage} />
+      {/* <UnAuthOnlyRoute exact path={LOGIN_PAGE} render={() => <Logistration selectedPage={LOGIN_PAGE} />} /> */}
+      <UnAuthOnlyRoute exact path={LOGIN_PAGE} render={() => <LoginPageNew selectedPage={LOGIN_PAGE}  />} /> 
+      {/* <UnAuthOnlyRoute exact path={REGISTER_PAGE} component={Logistration} /> */}
+      <UnAuthOnlyRoute exact path={REGISTER_PAGE} render={()=><RegisterPageNew selectedPage={REGISTER_PAGE} />} />
+      <UnAuthOnlyRoute exact path={RESET_PAGE} render={()=><ForgotPassword  />} />
+      <Route exact path='/confirmation' render={()=><ConfirmationPage />} />
       <Route exact path={PASSWORD_RESET_CONFIRM} component={ResetPasswordPage} />
       <Route exact path={WELCOME_PAGE} component={ProgressiveProfiling} />
       <Route path={PAGE_NOT_FOUND} component={NotFoundPage} />
