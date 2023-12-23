@@ -24,7 +24,7 @@ const LoginPageNew = (props) => {
         
       <div style={{textAlign: 'center',  minWidth:'425px'}}>
         <div >
-            <Image style={{width:'105px' , height:'64px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
+            <Image style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
             <div className='login-header'>
                 <h1>{ intl.formatMessage(messages['home.auth.account'])}</h1>
                 <span>
