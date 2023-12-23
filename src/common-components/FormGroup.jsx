@@ -71,7 +71,7 @@ const FormGroup = (props) => {
           </span>
           </Form.Control.Feedback>
       )}
-      {props.errorLogin?.email == false && <Form.Control.Feedback key="error" className="error-text form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
+      {props.errorLogin && <Form.Control.Feedback key="error" className="error-text form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
           <span>
             <img src={iconWarning} alt='warning' />
           </span>
