@@ -12,6 +12,8 @@ import PropTypes from 'prop-types';
 import { LETTER_REGEX, NUMBER_REGEX } from '../data/constants';
 import messages from './messages';
 import iconWarning from './assets/Warning.svg'
+import eysViewIcon from './assets/Eye-view.svg'
+import eysHideIcon from './assets/Eye-hide.svg'
 
 const PasswordField = (props) => {
   const { formatMessage } = props.intl;
@@ -29,13 +31,25 @@ const PasswordField = (props) => {
     }
     setTimeout(() => setShowTooltip(props.showRequirements && true), 150);
   };
-
+  const handlerHidePwd = (e)=>{
+    e.preventDefault()
+    setHiddenTrue()
+  }
   const HideButton = (
-    <IconButton onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" src={VisibilityOff} iconAs={Icon} onClick={setHiddenTrue} size="sm" variant="secondary" alt={formatMessage(messages['hide.password'])} />
+    <button className='btn-outline' onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" onClick={handlerHidePwd}>
+    <img src={eysHideIcon} alt='hide' />
+  </button>
+    // <IconButton onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" src={VisibilityOff} iconAs={Icon} onClick={setHiddenTrue} size="sm" variant="secondary" alt={formatMessage(messages['hide.password'])} />
   );
-
+    const handlerViewPwd = (e)=>{
+      e.preventDefault()
+      setHiddenFalse()
+    }
   const ShowButton = (
-    <IconButton onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" src={Visibility} iconAs={Icon} onClick={setHiddenFalse} size="sm" variant="secondary" alt={formatMessage(messages['show.password'])} />
+    <button className='btn-outline' type='submit'  onBlur={handleBlur} name="passwordValidation"  onClick={handlerViewPwd}>
+      <img src={eysViewIcon} alt='view' />
+    </button>
+    // <IconButton onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" src={Visibility} iconAs={Icon} onClick={setHiddenFalse} size="sm" variant="" alt={formatMessage(messages['show.password'])}></IconButton>
   );
   const placement = window.innerWidth < 768 ? 'top' : 'left';
   const tooltip = (
