@@ -138,7 +138,7 @@ const messages = defineMessages({
   },
   "register.auth.account.now" :{
     id : "register.auth.account.now",
-    defineMessages : "Register now"
+    defaultMessage : "Register now"
   }
 });
 
