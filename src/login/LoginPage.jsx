@@ -61,7 +61,7 @@ class LoginPage extends React.Component {
   componentDidMount() {
     sendPageEvent('login_and_registration', 'login');
     const payload = { ...this.queryParams };
-
+    document.title = 'login'
     if (this.tpaHint) {
       payload.tpa_hint = this.tpaHint;
     }
@@ -249,12 +249,12 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        {/* <Helmet>
+         <Helmet>
           <title>{intl.formatMessage(messages['login.page.title'],
             { siteName: getConfig().SITE_NAME })}
           </title>
         </Helmet>
-        <RedirectLogistration
+        {/*<RedirectLogistration
           success={this.props.loginResult.success}
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
