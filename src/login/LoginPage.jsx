@@ -41,6 +41,7 @@ import { INVALID_FORM } from './data/constants';
 import { loginErrorSelector, loginFormDataSelector, loginRequestSelector } from './data/selectors';
 import LoginFailureMessage from './LoginFailure';
 import messages from './messages';
+import iconWarning from '../common-components/assets/Warning.svg'
 
 class LoginPage extends React.Component {
   constructor(props, context) {
@@ -301,6 +302,10 @@ class LoginPage extends React.Component {
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
                 <span>Đăng nhập</span>
               </button>
+              {this.props.loginError && <span className=' login-error'>
+                <img src={iconWarning} alt='warning' />
+                  <span>Đăng nhập không thành công, vui lòng kiểm tra lại thông tin đăng nhập</span>
+                </span>}
             {/* <StatefulButton
               name="sign-in"
               id="sign-in"

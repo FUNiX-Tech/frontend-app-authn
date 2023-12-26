@@ -71,14 +71,7 @@ const FormGroup = (props) => {
           </span>
           </Form.Control.Feedback>
       )}
-      {props.errorLogin && <Form.Control.Feedback key="error" className="error-text form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
-          <span>
-            <img src={iconWarning} alt='warning' />
-          </span>
-          <span>
-          Địa chỉ email hoặc user không chính xác, vui lòng nhập lại 
-          </span>
-          </Form.Control.Feedback>}
+
       {props.children}
     </Form.Group>
   );

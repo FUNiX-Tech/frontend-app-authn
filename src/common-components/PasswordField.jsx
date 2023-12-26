@@ -68,7 +68,12 @@ const PasswordField = (props) => {
       </span>
     </Tooltip>
   );
-    // console.log('========', props.errorLogin)
+
+    let messagesError = props.errorMessage
+    if (props.errorMessage == 'The password is too similar to the username.'){
+      messagesError = 'Mật khẩu không được giống với tên người dùng.'
+    }
+    
   return (
     <Form.Group controlId={props.name} isInvalid={props.errorMessage !== ''}>
       <OverlayTrigger key="tooltip" placement={placement} overlay={tooltip} show={showTooltip}>
@@ -103,16 +108,8 @@ const PasswordField = (props) => {
           <span>
             <img src={iconWarning} alt='warning' />
           </span>
-         <span> {props.errorMessage}</span>
+         <span> {messagesError}</span>
           <span className="sr-only">{formatMessage(messages['password.sr.only.helping.text'])}</span>
-        </Form.Control.Feedback>
-      )}
-      {props.errorLogin  && (
-        <Form.Control.Feedback key="error" className="error-text  form-text-size" hasIcon={false} feedback-for={props.name} type="invalid">
-          <span>
-            <img src={iconWarning} alt='warning' />
-          </span>
-          <span>mật khẩu không đúng. </span>
         </Form.Control.Feedback>
       )}
     </Form.Group>
