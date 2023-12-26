@@ -24,7 +24,7 @@ const FormGroup = (props) => {
  
   
 
-  console.log(props.errorLogin)
+
   
   return (
     <Form.Group controlId={props.name} className={props.className} isInvalid={props.errorMessage !== ''}>
