@@ -36,7 +36,7 @@ const PasswordField = (props) => {
     setHiddenTrue()
   }
   const HideButton = (
-    <button className='btn-outline' onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" onClick={handlerHidePwd}>
+    <button className='btn-outline' type="button"  onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" onClick={handlerHidePwd}>
     <img src={eysHideIcon} alt='hide' />
   </button>
     // <IconButton onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" src={VisibilityOff} iconAs={Icon} onClick={setHiddenTrue} size="sm" variant="secondary" alt={formatMessage(messages['hide.password'])} />
@@ -46,7 +46,7 @@ const PasswordField = (props) => {
       setHiddenFalse()
     }
   const ShowButton = (
-    <button className='btn-outline' type='submit'  onBlur={handleBlur} name="passwordValidation"  onClick={handlerViewPwd}>
+    <button className='btn-outline' type="button"  onBlur={handleBlur} name="passwordValidation"  onClick={handlerViewPwd}>
       <img src={eysViewIcon} alt='view' />
     </button>
     // <IconButton onFocus={handleFocus} onBlur={handleBlur} name="passwordValidation" src={Visibility} iconAs={Icon} onClick={setHiddenFalse} size="sm" variant="" alt={formatMessage(messages['show.password'])}></IconButton>
