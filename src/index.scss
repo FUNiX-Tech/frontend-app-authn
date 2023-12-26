@@ -150,3 +150,19 @@ input:-webkit-autofill:focus {
   color : black !important;
   
 }
+
+.login-error{
+  font-size: 12px;
+  display: flex;
+  margin-top: 10px;
+  align-content: center;
+  background: #FFF5F5;
+  justify-content: center;
+  gap: 3px;
+  color: #D82C0D;
+  padding: 4px 8px 4px 8px;
+  span {
+    
+  }
+  
+}
