@@ -7,12 +7,15 @@ import BaseComponent from '../base-component';
 import iconVector from "./assets/Vector.png"
 
 
+import { Helmet } from 'react-helmet';
 const ForgotPassword = (props) => {
   const { intl, selectedPage } = props;
 
   return (
     <BaseComponent>
-        
+        <Helmet>
+          <title>Forgot Password | {getConfig().SITE_NAME}</title>
+        </Helmet>   
       <div style={{textAlign: 'center',  minWidth:'425px'}}>
         <div>
             <div>

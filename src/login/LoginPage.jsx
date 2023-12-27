@@ -41,6 +41,7 @@ import { INVALID_FORM } from './data/constants';
 import { loginErrorSelector, loginFormDataSelector, loginRequestSelector } from './data/selectors';
 import LoginFailureMessage from './LoginFailure';
 import messages from './messages';
+import iconWarning from '../common-components/assets/Warning.svg'
 
 class LoginPage extends React.Component {
   constructor(props, context) {
@@ -61,7 +62,7 @@ class LoginPage extends React.Component {
   componentDidMount() {
     sendPageEvent('login_and_registration', 'login');
     const payload = { ...this.queryParams };
-
+    document.title = 'login'
     if (this.tpaHint) {
       payload.tpa_hint = this.tpaHint;
     }
@@ -249,12 +250,12 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        {/* <Helmet>
+         <Helmet>
           <title>{intl.formatMessage(messages['login.page.title'],
             { siteName: getConfig().SITE_NAME })}
           </title>
         </Helmet>
-        <RedirectLogistration
+        {/*<RedirectLogistration
           success={this.props.loginResult.success}
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
@@ -296,11 +297,17 @@ class LoginPage extends React.Component {
               errorLogin = {this.props.loginError}
             />
        
-                <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
+                <div className='d-flex justify-content-end'>
+                  <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
+                </div>
            
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
                 <span>Đăng nhập</span>
               </button>
+              {this.props.loginError && <span className=' login-error'>
+                <img src={iconWarning} alt='warning' />
+                  <span>Đăng nhập không thành công, vui lòng kiểm tra lại thông tin đăng nhập</span>
+                </span>}
             {/* <StatefulButton
               name="sign-in"
               id="sign-in"

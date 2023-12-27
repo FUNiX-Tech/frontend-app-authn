@@ -69,7 +69,7 @@
   gap:8px;
   background-color: #FFF5F5;
   width: 416px;
-  height: 24px;
+  // height: 24px;
   border-radius: 4px;
   padding: 4px 8px 4px 8px;
 }
@@ -91,7 +91,6 @@
   font-size: 14px;
   line-height: 21px;
   font-weight: 700;
-  margin-top: 10px;
   padding-bottom: 12px;
   text-decoration: underline;
 }
@@ -131,4 +130,38 @@
     font-weight: 500;
     color : #007AE6;
   }
+}
+
+.btn-outline{
+  border: none;
+  background: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  transition: background-color 5000s ease-in-out 0s;
+
+}
+
+.btn-icon.btn-icon-black:hover{
+  background: none !important;
+  color : black !important;
+  
+}
+
+.login-error{
+  font-size: 12px;
+  display: flex;
+  margin-top: 10px;
+  align-content: center;
+  background: #FFF5F5;
+  justify-content: center;
+  gap: 3px;
+  color: #D82C0D;
+  padding: 4px 8px 4px 8px;
+  span {
+    
+  }
+  
 }
