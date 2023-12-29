@@ -20,7 +20,9 @@ const ForgotPassword = (props) => {
       <div style={{textAlign: 'center',  minWidth:'425px'}}>
         <div>
             <div>
-            <Image style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
+              <Link to='/login'>
+                <Image style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
+              </Link>
             </div>
             <div className='d-flex flex-column forgot-pwd-title'>
                 <h3>Quên mật khẩu</h3>
