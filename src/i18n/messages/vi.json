@@ -132,7 +132,7 @@
     "registration.username.label": "Tên người dùng",
     "registration.password.label": "Mật khẩu",
     "registration.country.label": "Country/Region",
-    "registration.organization.label" : "Tổ chức của bạn", 
+    "registration.organization.label" : "Công ty hoặc tổ chức của bạn", 
     "registration.opt.in.label": "I agree that {siteName} may send me marketing messages.",
     "help.text.name": "Tên này sẽ được sử dụng bởi bất kỳ chứng chỉ nào mà bạn đạt được.",
     "help.text.username.1": "Tên người dùng sẽ giúp nhận dạng bạn trong các khoá học",
