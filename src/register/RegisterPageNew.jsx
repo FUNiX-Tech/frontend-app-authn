@@ -14,7 +14,9 @@ const RegisterPageNew = ()=>{
                             <Link to='/login' > Đăng nhập ngay</Link>
                     </div>
                 <div style={{textAlign: 'center'}}>
-                <Image style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
+                <Link to='/login' >
+            <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
+                     </Link>
                     <div className='header-register'>
                         <h1>Đăng ký tài khoản</h1>
                         <div className='d-flex flex-column align-items-center justify-content-center'>
