@@ -5,25 +5,26 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import BaseComponent from '../base-component';
 import iconVector from "./assets/Vector.png"
-
-
+import {  Image } from '@edx/paragon';
 import { Helmet } from 'react-helmet';
+
+
 const ForgotPassword = (props) => {
   const { intl, selectedPage } = props;
 
   return (
     <BaseComponent>
         <Helmet>
-          <title>Forgot Password | {getConfig().SITE_NAME}</title>
+          <title>Quên mật khẩu | {getConfig().SITE_NAME}</title>
         </Helmet>   
       <div style={{textAlign: 'center',  minWidth:'425px'}}>
         <div>
             <div>
-                <img src={iconVector} alt='' />
+            <Image style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
             </div>
             <div className='d-flex flex-column forgot-pwd-title'>
                 <h3>Quên mật khẩu</h3>
-                <span>Bạn vui lòng liên hệ Admin để được làm mới lại mật khẩu</span>
+                <span>Bạn vui lòng liên hệ quản trị viên để  nhận lại mật khẩu mới</span>
             </div>
             <div>
                 <button className='btn-primary-custom  w-100'  >
