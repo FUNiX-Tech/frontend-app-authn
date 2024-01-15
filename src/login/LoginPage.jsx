@@ -174,15 +174,7 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
-          && (
-  
-            <div className="social-item py-4 d-flex justify-content-center align-items-center">
-            <span className=''></span>
-            {intl.formatMessage(messages['login.other.options.heading'])}
-            <span className=''></span>
-          </div>
-          )}
+ 
 
         {/* {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
           <Hyperlink className="btn btn-link btn-sm text-body p-0 mb-4" destination={this.getEnterPriseLoginURL()}>
@@ -208,6 +200,16 @@ class LoginPage extends React.Component {
             )}
           </>
         )}
+
+      {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
+          && (
+  
+            <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
+            {intl.formatMessage(messages['login.other.options.heading'])}
+            <span className=''></span>
+          </div>
+          )}
       </>
     );
   }
@@ -273,6 +275,7 @@ class LoginPage extends React.Component {
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
           {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null} */}
           <Form name="sign-in-form" id="sign-in-form">
+             {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
             <FormGroup
               name="emailOrUsername"
               value={this.state.emailOrUsername}
@@ -331,7 +334,7 @@ class LoginPage extends React.Component {
             >
               {intl.formatMessage(messages['forgot.password'])}
             </Link> */}
-            {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
+    
           </Form>
         </div>
       </>

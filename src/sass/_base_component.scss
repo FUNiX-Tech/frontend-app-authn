@@ -1,6 +1,6 @@
 
 .layout {
-  display: flex;
+  // display: flex;
 
   @include media-breakpoint-down('lg') {
     // flex-direction: column;
@@ -14,6 +14,9 @@
 }
 
 .content {
+  display: flex;
+  justify-content: center;
+  
   @include media-breakpoint-up('xl') {
     display: flex;
     justify-content: center;

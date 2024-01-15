@@ -31,7 +31,7 @@ const LoginPageNew = (props) => {
                 <h1>{ intl.formatMessage(messages['home.auth.account'])}</h1>
                 <span>
                     <span>{intl.formatMessage(messages['login.auth.not.account'])} </span>
-                    <Link to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
+                    <Link className='' to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
                 </span>
             </div>
         </div>

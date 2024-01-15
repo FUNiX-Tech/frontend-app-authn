@@ -676,13 +676,7 @@ class RegistrationPage extends React.Component {
     // }
     return (
       <>
-        {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="social-item py-4 d-flex justify-content-center align-items-center">
-            <span className=''></span>
-            {intl.formatMessage(messages['registration.other.options.heading'])}
-            <span className=''></span>
-          </div>
-        )}
+       
 
         {thirdPartyAuthApiStatus === PENDING_STATE ? (
           <Skeleton className="tpa-skeleton" height={36} count={2} />
@@ -700,6 +694,14 @@ class RegistrationPage extends React.Component {
               </div>
             )}
           </>
+        )}
+
+      {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
+          <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
+            {intl.formatMessage(messages['registration.other.options.heading'])}
+            <span className=''></span>
+          </div>
         )}
       </>
     );
@@ -842,6 +844,11 @@ class RegistrationPage extends React.Component {
             </>
           )} */}
           <Form id="registration-form" name="registration-form">
+          {this.renderThirdPartyAuth(providers,
+              secondaryProviders,
+              currentProvider,
+              thirdPartyAuthApiStatus,
+              intl)}
            
             {/* <FormGroup
               name="name"
@@ -968,16 +975,12 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()} 
             />*/}
-            {this.renderThirdPartyAuth(providers,
-              secondaryProviders,
-              currentProvider,
-              thirdPartyAuthApiStatus,
-              intl)}
+           
           </Form>
-          <div className='form-footer'>
+          {/* <div className='form-footer'>
               <span>Bằng cách tạo tài khoản, bạn đồng ý với  </span>
               <span><a href='' >Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a></span>
-          </div>
+          </div> */}
         </div>
       </>
     );
