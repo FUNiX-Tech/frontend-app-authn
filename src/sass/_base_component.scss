@@ -1,28 +1,58 @@
 
 .layout {
-  // display: flex;
-
+  display: flex;
+  min-width: 425px;
   @include media-breakpoint-down('lg') {
+    // min-width: 100px;
+    margin-top:2rem;
     // flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
+    justify-content: center;
+    align-items: center;
   }
 
   @include media-breakpoint-up('xl') {
     // justify-content: space-between;
+    margin-top:2rem;
+    // min-width: 100px;
+    // flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
+  
+
+  
 }
 
 .content {
-  display: flex;
-  justify-content: center;
+  // display: flex;
+  // justify-content: center;
   
-  @include media-breakpoint-up('xl') {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 4rem;
+  .page {
+    min-width: 425px;
+    @include media-breakpoint-down('xl'){
+      min-width: 425px;
+    }
+    // @include media-breakpoint-down('lg') {
+    //   min-width: 425px;
+    // }
+    // @include media-breakpoint-down('md'){
+    //   min-width: 100px;
+    // }
+    @include media-breakpoint-down('xs'){
+      width: 300px;
+      padding:0px 20px;
+     
+    }
   }
+  @include media-breakpoint-up('xl') {
+    // display: flex;
+    // justify-content: center;
+    // width: 100%;
+    // margin-top: 4rem;
+    
+  }
+
+   
 }
 
 .logo-small {

@@ -17,7 +17,7 @@ const ForgotPassword = (props) => {
         <Helmet>
           <title>Quên mật khẩu | {getConfig().SITE_NAME}</title>
         </Helmet>   
-      <div style={{textAlign: 'center',  minWidth:'425px'}}>
+      <div style={{textAlign: 'center'}}>
         <div>
             <div>
               <Link to='/login'>

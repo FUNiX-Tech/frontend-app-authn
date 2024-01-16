@@ -8,7 +8,7 @@ const RegisterPageNew = ()=>{
 
     return (
         <BaseComponent>
-           <div className='d-flex flex-column' style={{  minWidth:'425px'}}>
+           <div className='page d-flex flex-column' >
                 {/* <div className='navbar-login w-100' style={{textAlign:'end'}}>
                             <span>Bạn đã có tài khoản? </span>
                             <Link to='/login' > Đăng nhập ngay</Link>

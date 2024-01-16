@@ -22,7 +22,7 @@ const LoginPageNew = (props) => {
   return (
     <BaseComponent>
         
-      <div style={{textAlign: 'center',  minWidth:'425px'}}>
+      <div className='page d-flex flex-column' style={{textAlign: 'center'}}>
         <div >
           <Link to='/login'>
             <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
