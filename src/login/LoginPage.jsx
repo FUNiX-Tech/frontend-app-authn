@@ -174,15 +174,7 @@ class LoginPage extends React.Component {
 
     return (
       <>
-        {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
-          && (
-  
-            <div className="social-item py-4 d-flex justify-content-center align-items-center">
-            <span className=''></span>
-            {intl.formatMessage(messages['login.other.options.heading'])}
-            <span className=''></span>
-          </div>
-          )}
+ 
 
         {/* {(!isEnterpriseLoginDisabled && isSocialAuthActive) && (
           <Hyperlink className="btn btn-link btn-sm text-body p-0 mb-4" destination={this.getEnterPriseLoginURL()}>
@@ -202,12 +194,22 @@ class LoginPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row m-0">
+              <div className="row">
                 <SocialAuthProviders socialAuthProviders={providers} login />
               </div>
             )}
           </>
         )}
+
+      {(isSocialAuthActive || (isEnterpriseLoginDisabled && isInstitutionAuthActive))
+          && (
+  
+            <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
+            {intl.formatMessage(messages['login.other.options.heading'])}
+            <span className=''></span>
+          </div>
+          )}
       </>
     );
   }
@@ -273,6 +275,7 @@ class LoginPage extends React.Component {
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
           {this.props.resetPassword && !this.props.loginError ? <ResetPasswordSuccess /> : null} */}
           <Form name="sign-in-form" id="sign-in-form">
+             {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
             <FormGroup
               name="emailOrUsername"
               value={this.state.emailOrUsername}
@@ -297,9 +300,7 @@ class LoginPage extends React.Component {
               errorLogin = {this.props.loginError}
             />
        
-                <div className='d-flex justify-content-end'>
-                  <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
-                </div>
+                
            
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
                 <span>Đăng nhập</span>
@@ -331,7 +332,17 @@ class LoginPage extends React.Component {
             >
               {intl.formatMessage(messages['forgot.password'])}
             </Link> */}
-            {this.renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl)}
+   
+             <div className='d-flex flex-column pt-3'>
+                <div className='d-flex justify-content-center'>
+                        <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
+                  </div>
+                  <div className='d-flex justify-content-center align-item-center' style={{gap:'5px'}}>
+                        <span className='text'>Bạn chưa có tài khoản?</span>
+                        <Link className='forgot-password' to="/register"> Đăng ký ngay</Link>
+                   </div> 
+             </div>
+         
           </Form>
         </div>
       </>

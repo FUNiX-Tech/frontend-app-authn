@@ -58,6 +58,7 @@ import RegistrationFailure from './RegistrationFailure';
 import TermsOfService from './TermsOfService';
 import UsernameField from './UsernameField';
 import { getLevenshteinSuggestion, getSuggestionForInvalidEmail } from './utils';
+import { Link } from 'react-router-dom';
 
 
 
@@ -240,6 +241,15 @@ class RegistrationPage extends React.Component {
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
     const dynamicFieldErrorMessages = {};
+      // console.log('============',this.props.usernameSuggestions)
+    if (this.state.name.length == 0 ){
+      this.state.name = this.state.email.split('@')[0];
+    }
+    if ( this.state.username.length == 0) {
+      this.state.username = this.state.email.split('@')[0];
+    }
+
+
 
     let payload = {
       name: this.state.name,
@@ -292,14 +302,14 @@ class RegistrationPage extends React.Component {
 
     payload = snakeCaseObject(payload);
     payload.totalRegistrationTime = totalRegistrationTime;
-    console.log('==========' , payload)
+
     // add query params to the payload
     // if (this.props.organization){
     //   payload = { ...payload, ...this.queryParams, organization: 'Staging' };
     // } else {
     //   payload = { ...payload, ...this.queryParams, organization: '' };
     // }
-
+    // console.log('==============', payload)
     
     this.setState({
       totalRegistrationTime,
@@ -532,47 +542,48 @@ class RegistrationPage extends React.Component {
           };
         }
         break;
-      case 'name':
-        if (!value.trim()) {
-          errors.name = intl.formatMessage(messages['empty.name.field.error']);
-        } else if (value && value.match(urlRegex)) {
-          errors.name = intl.formatMessage(messages['name.validation.message']);
-        } else {
-          errors.name = '';
-        }
+      // case 'name':
+      //   if (!value.trim()) {
+      //     errors.name = intl.formatMessage(messages['empty.name.field.error']);
+      //   } else if (value && value.match(urlRegex)) {
+      //     errors.name = intl.formatMessage(messages['name.validation.message']);
+      //   } else {
+      //     errors.name = '';
+      //   }
 
-        if (!this.state.username.trim() && value) {
-          // fetch username suggestions based on the full name
-          this.props.fetchRealtimeValidations(payload);
-        }
-        break;
-      case 'username':
-        if (value === ' ' && this.props.usernameSuggestions.length > 0) {
-          errors.username = '';
-          break;
-        }
-        if (!value || value.length <= 1 || value.length > 30) {
-          errors.username = intl.formatMessage(messages['username.validation.message']);
-        } else if (!value.match(/^[a-zA-Z0-9_-]*$/i)) {
-          errors.username = intl.formatMessage(messages['username.format.validation.message']);
-        } else if (payload && statusCode !== 403) {
-          this.props.fetchRealtimeValidations(payload);
-        } else {
-          errors.username = '';
-        }
+      //   if (!this.state.username.trim() && value) {
+      //     // fetch username suggestions based on the full name
+      //     this.props.fetchRealtimeValidations(payload);
+      //   }
+      //   break;
+      // case 'username':
+      //   if (value === ' ' && this.props.usernameSuggestions.length > 0) {
+      //     errors.username = '';
+      //     break;
+      //   }
+      //   if (!value || value.length <= 1 || value.length > 30) {
+      //     errors.username = intl.formatMessage(messages['username.validation.message']);
+      //   } else if (!value.match(/^[a-zA-Z0-9_-]*$/i)) {
+      //     errors.username = intl.formatMessage(messages['username.format.validation.message']);
+      //   } else if (payload && statusCode !== 403) {
+      //     this.props.fetchRealtimeValidations(payload);
+      //   } else {
+      //     errors.username = '';
+      //   }
 
-        if (this.state.validatePassword) {
-          this.props.fetchRealtimeValidations({ ...payload, form_field_key: 'password' });
-        }
-        break;
+      //   if (this.state.validatePassword) {
+      //     this.props.fetchRealtimeValidations({ ...payload, form_field_key: 'password' });
+      //   }
+      //   break;
       case 'password':
         errors.password = '';
-        if (!value || !LETTER_REGEX.test(value) || !NUMBER_REGEX.test(value) || value.length < 8) {
+        // if (!value || !LETTER_REGEX.test(value) || !NUMBER_REGEX.test(value) || value.length < 8) {
+        if (!value) {
           errors.password = intl.formatMessage(messages['password.validation.message']);
         } else if (payload && statusCode !== 403) {
           this.props.fetchRealtimeValidations(payload);
         }
-        break;
+      //   break;
       // case 'country':
       //   value = value.trim(); // eslint-disable-line no-param-reassign
       //   if (value) {
@@ -673,13 +684,7 @@ class RegistrationPage extends React.Component {
     // }
     return (
       <>
-        {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
-          <div className="social-item py-4 d-flex justify-content-center align-items-center">
-            <span className=''></span>
-            {intl.formatMessage(messages['registration.other.options.heading'])}
-            <span className=''></span>
-          </div>
-        )}
+       
 
         {thirdPartyAuthApiStatus === PENDING_STATE ? (
           <Skeleton className="tpa-skeleton" height={36} count={2} />
@@ -698,6 +703,14 @@ class RegistrationPage extends React.Component {
             )}
           </>
         )}
+
+      {((isEnterpriseLoginDisabled && isInstitutionAuthActive) || isSocialAuthActive) && (
+          <div className="social-item py-4 d-flex justify-content-center align-items-center">
+            <span className=''></span>
+            {intl.formatMessage(messages['registration.other.options.heading'])}
+            <span className=''></span>
+          </div>
+        )}
       </>
     );
   }
@@ -713,7 +726,9 @@ class RegistrationPage extends React.Component {
       const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
   
       const {email, password, name ,organization , username} = this.state
-      const isAllFieldsFilled = email.length > 0  && name.length > 0 && organization.length > 0 && username.length > 0;
+      // const isAllFieldsFilled = email.length > 0  && name.length > 0 && organization.length > 0 && username.length > 0;
+      const isAllFieldsFilled = email.length > 0 && organization.length > 0 ;
+
 
     if (this.props.institutionLogin) {
       return (
@@ -838,8 +853,13 @@ class RegistrationPage extends React.Component {
             </>
           )} */}
           <Form id="registration-form" name="registration-form">
+          {this.renderThirdPartyAuth(providers,
+              secondaryProviders,
+              currentProvider,
+              thirdPartyAuthApiStatus,
+              intl)}
            
-            <FormGroup
+            {/* <FormGroup
               name="name"
               value={this.state.name}
               autoComplete="on"
@@ -850,7 +870,7 @@ class RegistrationPage extends React.Component {
               helpText={[intl.formatMessage(messages['help.text.name'])]}
               floatingLabel={intl.formatMessage(messages['registration.fullname.label'])}
             />
-            
+             */}
             <FormGroup
               name="email"
               value={this.state.email}
@@ -866,7 +886,7 @@ class RegistrationPage extends React.Component {
               {this.renderEmailFeedback()}
             </FormGroup>
 
-            <UsernameField
+            {/* <UsernameField
               name="username"
               spellCheck="false"
               value={this.state.username}
@@ -880,7 +900,7 @@ class RegistrationPage extends React.Component {
               handleSuggestionClick={this.handleSuggestionClick}
               usernameSuggestions={this.props.usernameSuggestions}
               handleUsernameSuggestionClose={this.handleUsernameSuggestionClose}
-            />
+            /> */}
 
             {!currentProvider && (
               <PasswordField
@@ -964,16 +984,15 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()} 
             />*/}
-            {this.renderThirdPartyAuth(providers,
-              secondaryProviders,
-              currentProvider,
-              thirdPartyAuthApiStatus,
-              intl)}
+           <div className='d-flex justify-content-center align-item-center pt-3' style={{gap:'5px'}}>
+              <span className='text'>Bạn đã có tài khoản? </span>
+                <Link className='forgot-password'  to='/login' > Đăng nhập ngay</Link>
+           </div>
           </Form>
-          <div className='form-footer'>
+          {/* <div className='form-footer'>
               <span>Bằng cách tạo tài khoản, bạn đồng ý với  </span>
               <span><a href='' >Điều khoản dịch vụ</a> và <a href=''>Chính sách quyền riêng tư</a></span>
-          </div>
+          </div> */}
         </div>
       </>
     );

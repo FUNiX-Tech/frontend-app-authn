@@ -14,7 +14,7 @@
     h1 {
         font-size: 32px;
         line-height: 48px;
-        font-family: Roboto;
+        // font-family: Roboto;
         width: 286px;
         height: 48px;
 
@@ -60,7 +60,7 @@
     span{
         border : 1px solid #D7D7D7;
         height: 0.5px;
-        width: 76.5px;
+        width: 100%;
     }
 }
 
@@ -116,7 +116,7 @@
   h1 {
     font-size: 32px;
     line-height: 48px;
-    font-family: Roboto serif;
+    // font-family: Roboto serif;
   }
   span {
     font-size: 18px;
@@ -164,4 +164,15 @@ input:-webkit-autofill:focus {
     
   }
   
+}
+
+.pgn__form-control-floating-label-text {
+  transform: translateY(-0.5625rem) scale(0.75) translateY(-80.0007500188%);
+  background-color: #ffff !important;
+}
+
+.text{
+  font-size: 14px;
+  line-height: 24px;
+  color : #576F8A;
 }

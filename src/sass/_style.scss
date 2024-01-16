@@ -577,7 +577,7 @@ select.form-control {
   position: relative;
   margin-top: -13.7%;
   margin-left: 15px;
-  padding-bottom: 20px;
+  padding-bottom: 30px;
 }
 .suggested-username-close-button {
   right: 1rem;
@@ -585,7 +585,8 @@ select.form-control {
 }
 .suggested-username-with-error {
   position: relative;
-  margin-top: -13.7%;
+  margin-top: -15.7%;
+  padding-bottom:20px;
   margin-bottom: 11%;
   margin-left: 15px;
 }
