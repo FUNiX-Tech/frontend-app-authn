@@ -309,7 +309,7 @@ class RegistrationPage extends React.Component {
     // } else {
     //   payload = { ...payload, ...this.queryParams, organization: '' };
     // }
-    console.log('==============', payload)
+    // console.log('==============', payload)
     
     this.setState({
       totalRegistrationTime,
