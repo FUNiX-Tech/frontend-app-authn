@@ -241,9 +241,16 @@ class RegistrationPage extends React.Component {
     const { startTime } = this.state;
     const totalRegistrationTime = (Date.now() - startTime) / 1000;
     const dynamicFieldErrorMessages = {};
-    this.state.name = this.state.email.split('@')[0];
-    // console.log('============',this.props.usernameSuggestions)
-    this.state.username = this.state.email.split('@')[0];
+      console.log('============',this.props.usernameSuggestions)
+    if (this.state.name.length == 0 ){
+      this.state.name = this.state.email.split('@')[0];
+    }
+    if ( this.state.username.length == 0) {
+      this.state.username = this.state.email.split('@')[0];
+    }
+
+
+
     let payload = {
       name: this.state.name,
       username: this.state.username,
@@ -304,11 +311,11 @@ class RegistrationPage extends React.Component {
     // }
     console.log('==============', payload)
     
-    this.setState({
-      totalRegistrationTime,
-    }, () => {
-      this.props.registerNewUser(payload);
-    });
+    // this.setState({
+    //   totalRegistrationTime,
+    // }, () => {
+    //   this.props.registerNewUser(payload);
+    // });
   }
 
   // handlerRegist (){
