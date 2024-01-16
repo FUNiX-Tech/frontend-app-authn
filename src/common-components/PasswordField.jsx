@@ -76,8 +76,7 @@ const PasswordField = (props) => {
     
   return (
     <Form.Group controlId={props.name} isInvalid={props.errorMessage !== ''}>
-      <OverlayTrigger key="tooltip" placement={placement} overlay={tooltip} show={showTooltip}>
-        <Form.Control
+       <Form.Control
           as="input"
           className="form-field"
           type={isPasswordHidden ? 'password' : 'text'}
@@ -92,7 +91,6 @@ const PasswordField = (props) => {
           trailingElement={isPasswordHidden ? ShowButton : HideButton}
           floatingLabel={props.floatingLabel}
         />
-      </OverlayTrigger>
       {props.errorMessage == '' && props.helpText ? (
           <Form.Control.Feedback type="default" key="help-text" className="d-block form-text-size">
             {props.helpText.map((message, index) => (

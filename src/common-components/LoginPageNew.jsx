@@ -22,17 +22,17 @@ const LoginPageNew = (props) => {
   return (
     <BaseComponent>
         
-      <div style={{textAlign: 'center',  minWidth:'425px'}}>
+      <div className='page d-flex flex-column' style={{textAlign: 'center'}}>
         <div >
           <Link to='/login'>
             <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
           </Link>
             <div className='login-header'>
                 <h1>{ intl.formatMessage(messages['home.auth.account'])}</h1>
-                <span>
+                {/* <span>
                     <span>{intl.formatMessage(messages['login.auth.not.account'])} </span>
-                    <Link to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
-                </span>
+                    <Link className='' to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
+                </span> */}
             </div>
         </div>
         <LoginPage />
