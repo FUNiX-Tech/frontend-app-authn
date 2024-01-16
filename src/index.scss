@@ -116,7 +116,7 @@
   h1 {
     font-size: 32px;
     line-height: 48px;
-    font-family: Roboto serif;
+    // font-family: Roboto serif;
   }
   span {
     font-size: 18px;
@@ -169,4 +169,10 @@ input:-webkit-autofill:focus {
 .pgn__form-control-floating-label-text {
   transform: translateY(-0.5625rem) scale(0.75) translateY(-80.0007500188%);
   background-color: #ffff !important;
+}
+
+.text{
+  font-size: 14px;
+  line-height: 24px;
+  color : #576F8A;
 }

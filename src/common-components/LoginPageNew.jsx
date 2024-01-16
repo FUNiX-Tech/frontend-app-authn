@@ -29,10 +29,10 @@ const LoginPageNew = (props) => {
           </Link>
             <div className='login-header'>
                 <h1>{ intl.formatMessage(messages['home.auth.account'])}</h1>
-                <span>
+                {/* <span>
                     <span>{intl.formatMessage(messages['login.auth.not.account'])} </span>
                     <Link className='' to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
-                </span>
+                </span> */}
             </div>
         </div>
         <LoginPage />

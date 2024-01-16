@@ -58,6 +58,7 @@ import RegistrationFailure from './RegistrationFailure';
 import TermsOfService from './TermsOfService';
 import UsernameField from './UsernameField';
 import { getLevenshteinSuggestion, getSuggestionForInvalidEmail } from './utils';
+import { Link } from 'react-router-dom';
 
 
 
@@ -975,7 +976,10 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()} 
             />*/}
-           
+           <div className='d-flex justify-content-center align-item-center pt-3' style={{gap:'5px'}}>
+              <span className='text'>Bạn đã có tài khoản? </span>
+                <Link className='forgot-password'  to='/login' > Đăng nhập ngay</Link>
+           </div>
           </Form>
           {/* <div className='form-footer'>
               <span>Bằng cách tạo tài khoản, bạn đồng ý với  </span>

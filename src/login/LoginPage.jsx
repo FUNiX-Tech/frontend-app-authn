@@ -300,9 +300,7 @@ class LoginPage extends React.Component {
               errorLogin = {this.props.loginError}
             />
        
-                <div className='d-flex justify-content-end'>
-                  <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
-                </div>
+                
            
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
                 <span>Đăng nhập</span>
@@ -334,7 +332,17 @@ class LoginPage extends React.Component {
             >
               {intl.formatMessage(messages['forgot.password'])}
             </Link> */}
-    
+   
+             <div className='d-flex flex-column pt-3'>
+                <div className='d-flex justify-content-center'>
+                        <Link className='forgot-password' to={updatePathWithQueryParams(RESET_PAGE)} > {intl.formatMessage(messages['forgot.password'])}</Link>
+                  </div>
+                  <div className='d-flex justify-content-center align-item-center' style={{gap:'5px'}}>
+                        <span className='text'>Bạn chưa có tài khoản?</span>
+                        <Link className='forgot-password' to="/register"> Đăng ký ngay</Link>
+                   </div> 
+             </div>
+         
           </Form>
         </div>
       </>
