@@ -720,7 +720,8 @@ class RegistrationPage extends React.Component {
   
       const {email, password, name ,organization , username} = this.state
       // const isAllFieldsFilled = email.length > 0  && name.length > 0 && organization.length > 0 && username.length > 0;
-      const isAllFieldsFilled = email.length > 0 && organization.length > 0 && password.length > 0;
+      const isAllFieldsFilled = email.length > 0 && organization.length > 0 ;
+
 
     if (this.props.institutionLogin) {
       return (
