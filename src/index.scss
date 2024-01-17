@@ -88,7 +88,7 @@
   display: block;
   text-align: end;
   color : #007AE6;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 21px;
   font-weight: 700;
   padding-bottom: 12px;
@@ -172,7 +172,18 @@ input:-webkit-autofill:focus {
 }
 
 .text{
-  font-size: 14px;
+  font-size: 16px;
   line-height: 24px;
   color : #576F8A;
+  font-weight: 400;
+}
+
+.text-link{
+  color : #007AE6 !important;
+  text-decoration: underline;
+  font-weight: 700;
+  &:hover{
+    color : #003c5e !important;
+  }
+  
 }

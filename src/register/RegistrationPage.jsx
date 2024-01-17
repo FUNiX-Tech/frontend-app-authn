@@ -984,9 +984,9 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()} 
             />*/}
-           <div className='d-flex justify-content-center align-item-center pt-3' style={{gap:'5px'}}>
+           <div className=' pt-3' >
               <span className='text'>Bạn đã có tài khoản? </span>
-                <Link className='forgot-password'  to='/login' > Đăng nhập ngay</Link>
+                <Link className='text text-link'  to='/login' > Đăng nhập ngay</Link>
            </div>
           </Form>
           {/* <div className='form-footer'>

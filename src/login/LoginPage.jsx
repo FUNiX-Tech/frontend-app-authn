@@ -339,7 +339,7 @@ class LoginPage extends React.Component {
                   </div>
                   <div className='d-flex justify-content-center align-item-center' style={{gap:'5px'}}>
                         <span className='text'>Bạn chưa có tài khoản?</span>
-                        <Link className='forgot-password' to="/register"> Đăng ký ngay</Link>
+                        <Link className='text text-link' to="/register"> Đăng ký ngay</Link>
                    </div> 
              </div>
          
