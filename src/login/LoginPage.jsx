@@ -227,7 +227,7 @@ class LoginPage extends React.Component {
     const {emailOrUsername , password} = this.state
     const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
     const isAllFieldsFilled = emailOrUsername.length > 0 && password.length > 0
-    // console.log('=======', this.props.loginError)
+    console.log('===submitState====', submitState)
     const activationMsgType = getActivationStatus();
     if (this.props.institutionLogin) {
       return (
@@ -301,21 +301,14 @@ class LoginPage extends React.Component {
             />
        
                 
-           
-              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
-                <span>Đăng nhập</span>
-              </button>
-              {this.props.loginError && <span className=' login-error'>
-                <img src={iconWarning} alt='warning' />
-                  <span>Đăng nhập không thành công, vui lòng kiểm tra lại thông tin đăng nhập</span>
-                </span>}
             {/* <StatefulButton
               name="sign-in"
               id="sign-in"
               type="submit"
               variant="brand"
-              className="login-button-width"
+              className="btn-primary-custom w-100"
               state={submitState}
+              disabledStates={['default']}
               labels={{
                 default: intl.formatMessage(messages['sign.in.button']),
                 pending: '',
@@ -323,6 +316,16 @@ class LoginPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()}
             /> */}
+            {/* <StatefulButton state="unedited" /> */}
+              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
+      
+               {submitState == 'pending' ? <div className='loading-container'><div className='loading'></div></div> :  <span>Đăng nhập</span>}
+              </button>
+              {this.props.loginError && <span className=' login-error'>
+                <img src={iconWarning} alt='warning' />
+                  <span>Đăng nhập không thành công, vui lòng kiểm tra lại thông tin đăng nhập</span>
+                </span>}
+            
             {/* <Link
               id="forgot-password"
               name="forgot-password"

@@ -964,7 +964,8 @@ class RegistrationPage extends React.Component {
             ) : <div>{honorCode}</div>} */}
             
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty } onClick={this.handleSubmit}>
-                <span>Đăng ký</span>
+             
+                {submitState == 'pending' ? <div className='loading-container'><div className='loading'></div></div> :    <span>Đăng ký</span>}
               </button>
            
             {/* <StatefulButton
