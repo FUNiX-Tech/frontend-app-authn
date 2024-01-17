@@ -161,7 +161,7 @@ $elevation-level-2-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
   // color: $white;
   // border-color: $google-blue;
   // background-color: $google-blue;
-  border: 1px solid #D7D7D7;
+  border: 1px solid #576F8A;
   background: linear-gradient(0deg, #FFFFFF, #FFFFFF),
   linear-gradient(0deg, #D7D7D7, #D7D7D7);
   padding: 8px 12px 8px 12px;
@@ -177,9 +177,11 @@ $elevation-level-2-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
     height: 34px;
   }
 
-  &:hover,
-  &:focus {
-   
+  &:hover{
+    border: 1px solid #8097B1;
+  }
+  &:active{
+    border: 1px solid #2C3744;
   }
 }
 
