@@ -22,8 +22,8 @@ const LoginPageNew = (props) => {
   return (
     <BaseComponent>
         
-      <div className='page d-flex flex-column' style={{textAlign: 'center'}}>
-        <div >
+      <div className='page d-flex flex-column'>
+        <div  style={{textAlign: 'center'}}>
           <Link to='/login'>
             <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
           </Link>
@@ -34,9 +34,9 @@ const LoginPageNew = (props) => {
                     <Link className='' to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
                 </span> */}
             </div>
-        </div>
+      
         <LoginPage />
-        
+        </div>
       </div>
     </BaseComponent>
   );
