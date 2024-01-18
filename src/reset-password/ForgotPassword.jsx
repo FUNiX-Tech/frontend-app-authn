@@ -7,6 +7,7 @@ import BaseComponent from '../base-component';
 import iconVector from "./assets/Vector.png"
 import {  Image } from '@edx/paragon';
 import { Helmet } from 'react-helmet';
+import Logo from '../common-components/Logo';
 
 
 const ForgotPassword = (props) => {
@@ -20,9 +21,7 @@ const ForgotPassword = (props) => {
       <div style={{textAlign: 'center'}}>
         <div>
             <div>
-              <Link to='/login'>
-                <Image style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
-              </Link>
+              <Logo />
             </div>
             <div className='d-flex flex-column forgot-pwd-title'>
                 <h2>Quên mật khẩu</h2>

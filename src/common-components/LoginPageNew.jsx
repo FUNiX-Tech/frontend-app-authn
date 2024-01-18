@@ -14,6 +14,7 @@ import {
     Form
   } from '@edx/paragon';
 import { LoginPage } from '../login';
+import Logo from './Logo';
 
 
 const LoginPageNew = (props) => {
@@ -24,9 +25,7 @@ const LoginPageNew = (props) => {
         
       <div className='page d-flex flex-column'>
         <div  style={{textAlign: 'center'}}>
-          <Link to='/login'>
-            <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
-          </Link>
+          <Logo  />
             <div className='login-header'>
                 <h2>{ intl.formatMessage(messages['home.auth.account'])}</h2>
                 {/* <span>
