@@ -262,7 +262,7 @@ class LoginPage extends React.Component {
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
         /> */}
-        <div className="mw-xs mt-3">
+        <div className="mw-xs ">
           {/* {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert

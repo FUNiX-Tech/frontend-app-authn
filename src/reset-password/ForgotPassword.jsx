@@ -25,7 +25,7 @@ const ForgotPassword = (props) => {
               </Link>
             </div>
             <div className='d-flex flex-column forgot-pwd-title'>
-                <h3>Quên mật khẩu</h3>
+                <h2>Quên mật khẩu</h2>
                 <span>Bạn vui lòng liên hệ quản trị viên để  nhận lại mật khẩu mới</span>
             </div>
             <div>

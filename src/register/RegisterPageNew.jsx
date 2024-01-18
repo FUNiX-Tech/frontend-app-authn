@@ -18,7 +18,7 @@ const RegisterPageNew = ()=>{
             <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
                      </Link>
                     <div className='header-register'>
-                        <h1>Đăng ký tài khoản</h1>
+                        <h2>Đăng ký tài khoản</h2>
                         <div className='d-flex flex-column align-items-center justify-content-center'>
                             <span className='text' style={{color :'#2C3744'}}>Chúng tôi cần 1 vài thông tin về công ty hoặc tổ chức của bạn </span>
                         </div>

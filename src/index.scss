@@ -6,6 +6,11 @@
 @import "@edx/frontend-component-cookie-policy-banner/build/_cookie-policy-banner";
 @import "sass/style";
 
+h2{
+  font-size: 24px;
+  
+}
+
 .header-register{
     display: flex;
     flex-direction: column;
