@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
 import {
@@ -19,13 +19,24 @@ const PasswordField = (props) => {
   const { formatMessage } = props.intl;
   const [isPasswordHidden, setHiddenTrue, setHiddenFalse] = useToggle(true);
   const [showTooltip, setShowTooltip] = useState(false);
+  const [error ,setError] = useState(false)
+
+
+  useEffect(()=>{
+    if (props.errorLogin){
+      setError(true)
+    }
+  },[props.errorLogin])
+
 
   const handleBlur = (e) => {
+    setError(false)
     if (props.handleBlur) { props.handleBlur(e); }
     setShowTooltip(props.showRequirements && false);
   };
 
   const handleFocus = (e) => {
+    setError(false)
     if (props.handleFocus) {
       props.handleFocus(e);
     }
@@ -75,7 +86,7 @@ const PasswordField = (props) => {
     }
     
   return (
-    <Form.Group controlId={props.name} isInvalid={props.errorMessage !== ''}>
+    <Form.Group controlId={props.name} isInvalid={props.errorMessage !== '' || error}>
        <Form.Control
           as="input"
           className="form-field"
@@ -89,7 +100,9 @@ const PasswordField = (props) => {
           onChange={props.handleChange}
           controlClassName={props.borderClass}
           trailingElement={isPasswordHidden ? ShowButton : HideButton}
-          floatingLabel={props.floatingLabel}
+          floatingLabel={
+            <span className={`${props.errorMessage || error ? 'label-error' : ""}`}>{props.floatingLabel}</span>
+          }
         />
       {props.errorMessage == '' && props.helpText ? (
           <Form.Control.Feedback type="default" key="help-text" className="d-block form-text-size">

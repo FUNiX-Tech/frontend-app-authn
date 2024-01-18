@@ -70,7 +70,7 @@
   display: flex;
   gap:8px;
   background-color: #FFF5F5;
-  width: 416px;
+  // width: 416px;
   // height: 24px;
   border-radius: 4px;
   padding: 4px 8px 4px 8px;
@@ -215,4 +215,8 @@ input:-webkit-autofill:focus {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.label-error{
+  color : #D82C0D;
 }
