@@ -194,7 +194,7 @@ class LoginPage extends React.Component {
               />
             )}
             {isSocialAuthActive && (
-              <div className="row">
+              <div className="">
                 <SocialAuthProviders socialAuthProviders={providers} login />
               </div>
             )}
@@ -227,7 +227,7 @@ class LoginPage extends React.Component {
     const {emailOrUsername , password} = this.state
     const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
     const isAllFieldsFilled = emailOrUsername.length > 0 && password.length > 0
-    // console.log('=======', this.props.loginError)
+    // console.log('===submitState====', submitState)
     const activationMsgType = getActivationStatus();
     if (this.props.institutionLogin) {
       return (
@@ -262,7 +262,7 @@ class LoginPage extends React.Component {
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
         /> */}
-        <div className="mw-xs mt-3">
+        <div className="mw-xs ">
           {/* {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert
@@ -301,21 +301,14 @@ class LoginPage extends React.Component {
             />
        
                 
-           
-              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
-                <span>Đăng nhập</span>
-              </button>
-              {this.props.loginError && <span className=' login-error'>
-                <img src={iconWarning} alt='warning' />
-                  <span>Đăng nhập không thành công, vui lòng kiểm tra lại thông tin đăng nhập</span>
-                </span>}
             {/* <StatefulButton
               name="sign-in"
               id="sign-in"
               type="submit"
               variant="brand"
-              className="login-button-width"
+              className="btn-primary-custom w-100"
               state={submitState}
+              disabledStates={['default']}
               labels={{
                 default: intl.formatMessage(messages['sign.in.button']),
                 pending: '',
@@ -323,6 +316,16 @@ class LoginPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()}
             /> */}
+            {/* <StatefulButton state="unedited" /> */}
+              <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty }  onClick={this.handleSubmit}>
+      
+               {submitState == 'pending' ? <div className='loading-container'><div className='loading'></div></div> :  <span>Đăng nhập</span>}
+              </button>
+              {this.props.loginError && <span className=' login-error'>
+                <img src={iconWarning} alt='warning' />
+                  <span>Đăng nhập không thành công, vui lòng kiểm tra lại thông tin đăng nhập</span>
+                </span>}
+            
             {/* <Link
               id="forgot-password"
               name="forgot-password"
@@ -339,7 +342,7 @@ class LoginPage extends React.Component {
                   </div>
                   <div className='d-flex justify-content-center align-item-center' style={{gap:'5px'}}>
                         <span className='text'>Bạn chưa có tài khoản?</span>
-                        <Link className='forgot-password' to="/register"> Đăng ký ngay</Link>
+                        <Link className='text text-link' to="/register"> Đăng ký ngay</Link>
                    </div> 
              </div>
          

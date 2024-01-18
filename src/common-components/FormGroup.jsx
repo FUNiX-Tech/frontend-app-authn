@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Form, TransitionReplace
@@ -8,32 +8,42 @@ import iconWarning from './assets/Warning.svg'
 
 const FormGroup = (props) => {
   const [hasFocus, setHasFocus] = useState(false);
+  const [error, setError]  = useState(false)
+
+  useEffect(()=>{
+    if (props.errorLogin){
+      setError(true)
+    }
+  },[props.errorLogin])
 
   const handleFocus = (e) => {
+    setError(false)
     setHasFocus(true);
     if (props.handleFocus) { props.handleFocus(e); }
   };
   const handleClick = (e) => {
+    setError(false)
     if (props.handleClick) { props.handleClick(e); }
   };
   const handleOnBlur = (e) => {
     setHasFocus(false);
+    setError(false)
     if (props.handleBlur) { props.handleBlur(e); }
   };
  
  
   
 
-
+  // console.log('==========', error)
   
   return (
-    <Form.Group controlId={props.name} className={props.className} isInvalid={props.errorMessage !== ''}>
+    <Form.Group controlId={props.name} className={props.className} isInvalid={props.errorMessage !== '' || error}>
       <Form.Control
         as={props.as}
         readOnly={props.readOnly}
         type={props.type}
         aria-invalid={props.errorMessage !== ''}
-        className="form-field"
+        className={`form-field `}
         autoComplete={props.autoComplete}
         spellCheck={props.spellCheck}
         name={props.name}
@@ -45,7 +55,9 @@ const FormGroup = (props) => {
         controlClassName={props.borderClass}
 
         trailingElement={props.trailingElement}
-        floatingLabel={props.floatingLabel}
+        floatingLabel={
+          <span className={`${props.errorMessage || error ? 'label-error' : ""}`}>{props.floatingLabel}</span>
+        }
       >
         {props.options ? props.options() : null}
       </Form.Control>

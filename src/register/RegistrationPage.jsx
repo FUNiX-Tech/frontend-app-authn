@@ -879,7 +879,7 @@ class RegistrationPage extends React.Component {
               handleChange={this.handleOnChange}
               errorMessage={this.state.errors.email}
               handleFocus={this.handleOnFocus}
-              helpText={[intl.formatMessage(messages['help.text.email'])]}
+              // helpText={[intl.formatMessage(messages['help.text.email'])]}
               floatingLabel={intl.formatMessage(messages['registration.email.label'])}
               borderClass={this.state.emailFieldBorderClass}
             >
@@ -911,7 +911,7 @@ class RegistrationPage extends React.Component {
                 handleChange={this.handleOnChange}
                 handleFocus={this.handleOnFocus}
                 errorMessage={this.state.errors.password}
-                helpText={[intl.formatMessage(messages['help.text.password'])]}
+                // helpText={[intl.formatMessage(messages['help.text.password'])]}
                 floatingLabel={intl.formatMessage(messages['registration.password.label'])}
               />
             )}
@@ -964,7 +964,8 @@ class RegistrationPage extends React.Component {
             ) : <div>{honorCode}</div>} */}
             
               <button className='btn-primary-custom w-100' disabled={ !isAllFieldsFilled  || !isAllFieldsEmpty } onClick={this.handleSubmit}>
-                <span>Đăng ký</span>
+             
+                {submitState == 'pending' ? <div className='loading-container'><div className='loading'></div></div> :    <span>Đăng ký</span>}
               </button>
            
             {/* <StatefulButton
@@ -984,9 +985,9 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()} 
             />*/}
-           <div className='d-flex justify-content-center align-item-center pt-3' style={{gap:'5px'}}>
+           <div className=' pt-3' >
               <span className='text'>Bạn đã có tài khoản? </span>
-                <Link className='forgot-password'  to='/login' > Đăng nhập ngay</Link>
+                <Link className='text text-link'  to='/login' > Đăng nhập ngay</Link>
            </div>
           </Form>
           {/* <div className='form-footer'>

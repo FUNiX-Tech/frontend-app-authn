@@ -14,6 +14,7 @@ import {
     Form
   } from '@edx/paragon';
 import { LoginPage } from '../login';
+import Logo from './Logo';
 
 
 const LoginPageNew = (props) => {
@@ -22,21 +23,19 @@ const LoginPageNew = (props) => {
   return (
     <BaseComponent>
         
-      <div className='page d-flex flex-column' style={{textAlign: 'center'}}>
-        <div >
-          <Link to='/login'>
-            <Image  style={{width:'105px' , paddingBottom:'20px'}} className="" alt={getConfig().SITE_NAME} src={getConfig().LOGO_URL} />
-          </Link>
+      <div className='page d-flex flex-column'>
+        <div  style={{textAlign: 'center'}}>
+          <Logo  />
             <div className='login-header'>
-                <h1>{ intl.formatMessage(messages['home.auth.account'])}</h1>
+                <h2>{ intl.formatMessage(messages['home.auth.account'])}</h2>
                 {/* <span>
                     <span>{intl.formatMessage(messages['login.auth.not.account'])} </span>
                     <Link className='' to="/register">{intl.formatMessage(messages['register.auth.account.now'])}</Link>
                 </span> */}
             </div>
-        </div>
+      
         <LoginPage />
-        
+        </div>
       </div>
     </BaseComponent>
   );
