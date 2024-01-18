@@ -93,9 +93,30 @@ $elevation-level-2-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
   background-color: $white !important;
   font-size: 0.875rem;
   line-height: 1.5;
-  height: 2.75rem;
+  height: 48px;
+  border : 1px solid #D7D7D7;
+  &:hover{
+    border: 1px solid #007AE6;
+  }
+  &:focus {
+    border: 2px solid #007AE6 !important;
+    box-shadow: none !important;
+
+   
+  }
 
 }
+
+.form-control:focus ~ .pgn__form-control-floating-label .pgn__form-control-floating-label-text {
+  color : #007AE6 !important;
+ 
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    border-color: #D82C0D;
+}
+
+
 
 .btn-social {
   display: flex;
@@ -170,6 +191,7 @@ $elevation-level-2-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
   gap: 12px;
   align-items: center;
   justify-content: center;
+  height:48px;
   .icon-image {
     margin-left: -6px;
     max-height: 34px;

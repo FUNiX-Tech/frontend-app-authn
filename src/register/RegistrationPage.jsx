@@ -879,7 +879,7 @@ class RegistrationPage extends React.Component {
               handleChange={this.handleOnChange}
               errorMessage={this.state.errors.email}
               handleFocus={this.handleOnFocus}
-              helpText={[intl.formatMessage(messages['help.text.email'])]}
+              // helpText={[intl.formatMessage(messages['help.text.email'])]}
               floatingLabel={intl.formatMessage(messages['registration.email.label'])}
               borderClass={this.state.emailFieldBorderClass}
             >
@@ -911,7 +911,7 @@ class RegistrationPage extends React.Component {
                 handleChange={this.handleOnChange}
                 handleFocus={this.handleOnFocus}
                 errorMessage={this.state.errors.password}
-                helpText={[intl.formatMessage(messages['help.text.password'])]}
+                // helpText={[intl.formatMessage(messages['help.text.password'])]}
                 floatingLabel={intl.formatMessage(messages['registration.password.label'])}
               />
             )}

@@ -227,7 +227,7 @@ class LoginPage extends React.Component {
     const {emailOrUsername , password} = this.state
     const isAllFieldsEmpty = !Object.values(errors).some(value => value !== "");
     const isAllFieldsFilled = emailOrUsername.length > 0 && password.length > 0
-    console.log('===submitState====', submitState)
+    // console.log('===submitState====', submitState)
     const activationMsgType = getActivationStatus();
     if (this.props.institutionLogin) {
       return (
@@ -262,7 +262,7 @@ class LoginPage extends React.Component {
           redirectUrl={this.props.loginResult.redirectUrl}
           finishAuthUrl={thirdPartyAuthContext.finishAuthUrl}
         /> */}
-        <div className="mw-xs mt-3">
+        <div className="mw-xs ">
           {/* {thirdPartyAuthContext.currentProvider
           && (
             <ThirdPartyAuthAlert

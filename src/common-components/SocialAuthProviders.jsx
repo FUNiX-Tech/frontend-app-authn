@@ -31,7 +31,7 @@ function SocialAuthProviders(props) {
       className={` w-100 btn-${provider.id} ${index % 2 === 0 ? 'mr-3' : ''}`}
       data-provider-url={referrer === LOGIN_PAGE ? provider.loginUrl : provider.registerUrl}
       onClick={handleSubmit}
-    > <img src={logoGoogle} alt='google' /> {login? 'Tiếp tục bằng Google' : 'Đăng ký bằng Google'}</button>
+    > <img src={logoGoogle} alt='google' /> {login? 'Tiếp tục bằng GG' : 'Đăng ký bằng GG'}</button>
       )
     }else {
       return (
