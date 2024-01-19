@@ -17,11 +17,16 @@ function SocialAuthProviders(props) {
     e.preventDefault();
 
     const url = e.currentTarget.dataset.providerUrl;
-    window.location.href = getConfig().LMS_BASE_URL + url;
+    const split_url = url.split('next=')
+    let url_result 
+    if (split_url.length > 1){
+        url_result = split_url + 'next=%2Fdashboard'
+    }
+
+    window.location.href = getConfig().LMS_BASE_URL + (url_result || url);
   }
 
   const socialAuth = socialAuthProviders.map((provider, index) => {
-    
     if (provider.name === 'Google') {
       return (
         <button
