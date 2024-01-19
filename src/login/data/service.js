@@ -20,7 +20,7 @@ export async function loginRequest(creds) {
     });
 
   return {
-    redirectUrl: data.redirect_url || `${getConfig().LMS_BASE_URL}/dashboard`,
+    redirectUrl: `${getConfig().LMS_BASE_URL}/dashboard`,
     success: data.success || false,
   };
 }
